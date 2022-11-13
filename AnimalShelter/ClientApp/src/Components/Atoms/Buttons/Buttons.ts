@@ -20,3 +20,14 @@ export const MediumButton = styled(DefaultButton)`
   align-items: center;
   font-size: ${(props: StyledTheme) => props.theme.fontSizes.small};
 `;
+
+export const LongButton = styled(MediumButton)`
+  color: ${(props: StyledTheme) => props.theme.colors.white};
+  background-color: ${(props: StyledTheme) => props.theme.colors.black};
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: ${(props: StyledTheme) => props.theme.fontSizes.small};
+  width: 150px;
+`;
