@@ -1,3 +1,4 @@
+using AnimalShelter;
 using AnimalShelter.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +12,17 @@ builder.Services.AddDbContext<AnimalShelterDbContext>(
 
     );
 
+
+
+
+
 var app = builder.Build();
+
+using var scope = app.Services.CreateScope();
+var dbcontext = scope.ServiceProvider.GetService<AnimalShelterDbContext>();
+
+DataGenerator.Seed(dbcontext);
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

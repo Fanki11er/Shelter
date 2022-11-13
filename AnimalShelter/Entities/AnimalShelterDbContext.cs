@@ -2,7 +2,7 @@
 
 namespace AnimalShelter.Entities
 {
-    public class AnimalShelterDbContext: DbContext
+    public  class AnimalShelterDbContext: DbContext
     {
         public AnimalShelterDbContext(DbContextOptions<AnimalShelterDbContext> options): base(options)
         {
@@ -33,15 +33,15 @@ namespace AnimalShelter.Entities
 
             modelBuilder.Entity<Adoption>(eb =>
             {
-                eb.Property(p => p.Date).HasDefaultValueSql("getutcdate");
+                eb.Property(p => p.Date).HasDefaultValueSql("getutcdate()");
                 eb.HasOne(a => a.Animal).WithOne(an => an.Adoption).HasForeignKey<Adoption>(ad => ad.Animal_Id);
                 eb.HasOne(a => a.Candidate).WithMany(cn => cn.Adoprions).HasForeignKey(ad => ad.Candidate_Id);
             });
 
             modelBuilder.Entity<Animal>(eb =>
             {
-                eb.HasOne(a => a.Species).WithMany(sp => sp.Animals).HasForeignKey(k => k.Species_Id);
-                eb.HasOne(a => a.Race).WithMany(ra => ra.Animals).HasForeignKey(k => k.Race_id);
+                eb.HasOne(a => a.Species).WithMany(sp => sp.Animals).HasForeignKey(k => k.Species_Id).OnDelete(DeleteBehavior.ClientSetNull);
+                eb.HasOne(a => a.Race).WithMany(ra => ra.Animals).HasForeignKey(k => k.Race_id).OnDelete(DeleteBehavior.ClientSetNull);
                 eb.HasOne(a => a.Gender).WithMany(ge => ge.Animals).HasForeignKey(k => k.Gender_id);
                 eb.HasOne(a => a.Den).WithOne(de =>de.Animal).HasForeignKey<Animal>(k => k.Den_Id);
 
@@ -64,6 +64,11 @@ namespace AnimalShelter.Entities
             modelBuilder.Entity<Den>(eb =>
             {
                 eb.HasOne(d => d.Box).WithMany(bx => bx.Dens).HasForeignKey(k => k.Box_Id);
+            });
+
+            modelBuilder.Entity<Race>(eb =>
+            {
+                eb.HasOne(d => d.Species).WithMany(sp => sp.Races).HasForeignKey(k => k.SpeciesId);
             });
         }
 
