@@ -52,5 +52,5 @@ export const FooterAuthorsWrapper = styled.div`
 `;
 
 export const FooterAuthorSpan = styled.span`
-  font-size: 12px;
+  font-size: ${(props: StyledTheme) => props.theme.fontSizes.small};
 `;

@@ -1,6 +1,12 @@
 export const theme: Theme = {
-  colors: {},
-  fontSizes: {},
+  colors: {
+    white: "white",
+    black: "black",
+    orange: "orange",
+  },
+  fontSizes: {
+    small: "12px",
+  },
   gradients: {
     mainPinkGRadient: "45deg, rgba(201, 132, 132, 0.2), rgba(201, 132, 132, 1)",
   },
@@ -13,11 +19,17 @@ export const theme: Theme = {
 };
 
 export type Theme = {
-  colors: {};
+  colors: {
+    white: string;
+    black: string;
+    orange: string;
+  };
   gradients: {
     mainPinkGRadient: string;
   };
-  fontSizes: {};
+  fontSizes: {
+    small: string;
+  };
 
   devices: {
     medium: string;
