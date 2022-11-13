@@ -1,8 +1,15 @@
+using AnimalShelter.Entities;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<AnimalShelterDbContext>(
+    option => option.UseSqlServer(builder.Configuration.GetConnectionString("AnimalShelterConnectionString"))
+
+    );
 
 var app = builder.Build();
 
