@@ -33,13 +33,13 @@ const MainView = () => {
       <PortalToAnimalsList
         headerSubtext="psa"
         buttonSubstring="psiaki"
-        spices={"Pies"}
+        species={"Pies"}
         animalsToAdoptionAmount={data ? data.dogsAmount : 0}
       />
       <PortalToAnimalsList
         headerSubtext="kota"
         buttonSubstring="kotki"
-        spices={"Kot"}
+        species={"Kot"}
         animalsToAdoptionAmount={data ? data.catsAmount : 0}
       />
 
