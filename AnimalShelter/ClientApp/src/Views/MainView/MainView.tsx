@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import AdoptionProcedureInfo from "../../Components/Molecules/AdoptionProcedureInfo/AdoptionProcedureInfo";
 import PortalToAnimalsList from "../../Components/Molecules/PortalToAnimalsList/PortalToAnimalsList";
 import { AnimalsToAdoptionAmount } from "../../Types/types";
 import {
@@ -41,6 +42,8 @@ const MainView = () => {
         spices={"Kot"}
         animalsToAdoptionAmount={data ? data.catsAmount : 0}
       />
+
+      <AdoptionProcedureInfo />
     </MainViewWrapper>
   );
 };
