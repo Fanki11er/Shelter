@@ -5,9 +5,10 @@ import AnimalsListView from "./Views/AnimalsListView/AnimalsListView";
 import LoginView from "./Views/LoginView/LoginView";
 import MainView from "./Views/MainView/MainView";
 import RegistrationView from "./Views/RegistrationView/RegistrationView";
+import StatisticsView from "./Views/StatisticsView/StatisticsView";
 
 const App = () => {
-  const { index, animalsList, registration, login } = routes;
+  const { index, animalsList, registration, login, statistics } = routes;
   return (
     <Routes>
       <Route element={<MainTemplate />}>
@@ -16,6 +17,7 @@ const App = () => {
         <Route path={"*"} element={<MainView />} />
         <Route path={registration} element={<RegistrationView />} />
         <Route path={login} element={<LoginView />} />
+        <Route path={statistics} element={<StatisticsView />} />
       </Route>
     </Routes>
   );
