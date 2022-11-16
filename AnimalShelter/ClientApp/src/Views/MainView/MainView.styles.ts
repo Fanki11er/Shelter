@@ -11,7 +11,7 @@ export const MainViewWrapper = styled.div`
   grid-template-columns: 1fr;
   grid-template-rows: 180px 150px 150px 1fr;
   padding: 30px;
-  grid-row-gap: 15px;
+  grid-row-gap: 20px;
 `;
 
 export const MainViewHeaderWrapper = styled.div`

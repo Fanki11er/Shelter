@@ -1,4 +1,6 @@
-import { Spices } from "../../../Types/types";
+import { Link } from "react-router-dom";
+import { routes } from "../../../Routes/Routes";
+import { Species } from "../../../Types/types";
 import { LongButton } from "../../Atoms/Buttons/Buttons";
 import {
   PortalToAnimalsListButtonWrapper,
@@ -10,15 +12,23 @@ type Props = {
   headerSubtext: string;
   buttonSubstring: string;
   animalsToAdoptionAmount: number;
-  spices: Spices;
+  species: Species;
 };
 const PortalToAnimalsList = (props: Props) => {
-  const { headerSubtext, animalsToAdoptionAmount, buttonSubstring } = props;
+  const { headerSubtext, animalsToAdoptionAmount, buttonSubstring, species } =
+    props;
+  const { animalsList } = routes;
   return (
     <PortalToAnimalsListWrapper>
       <PortalToAnimalsListHeader>{`Adoptuj ${headerSubtext}...  ${animalsToAdoptionAmount} zwierzaków czeka na Ciebie`}</PortalToAnimalsListHeader>
       <PortalToAnimalsListButtonWrapper>
-        <LongButton>{`Zobacz ${buttonSubstring}`}</LongButton>
+        <LongButton
+          as={Link}
+          to={animalsList}
+          state={{
+            species,
+          }}
+        >{`Zobacz ${buttonSubstring}`}</LongButton>
       </PortalToAnimalsListButtonWrapper>
     </PortalToAnimalsListWrapper>
   );

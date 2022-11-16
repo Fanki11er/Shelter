@@ -10,6 +10,8 @@ export const theme: Theme = {
   },
   gradients: {
     mainPinkGRadient: "45deg, rgba(201, 132, 132, 0.2), rgba(201, 132, 132, 1)",
+    mainPinkGradientReversed:
+      "-45deg, rgba(201, 132, 132, 1), rgba(201, 132, 132, 0)",
   },
 
   devices: {
@@ -28,6 +30,7 @@ export type Theme = {
   };
   gradients: {
     mainPinkGRadient: string;
+    mainPinkGradientReversed: string;
   };
   fontSizes: {
     small: string;
