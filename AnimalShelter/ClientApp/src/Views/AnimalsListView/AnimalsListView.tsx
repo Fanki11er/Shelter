@@ -6,6 +6,7 @@ import { AnimalForAdoption, Species } from "../../Types/types";
 import {
   AnimalsListViewHeader,
   AnimalsListViewWrapper,
+  NoAnimalsInformation,
 } from "./AnimalsListView.styles";
 
 const AnimalsListView = () => {
@@ -35,7 +36,13 @@ const AnimalsListView = () => {
       <AnimalsListViewHeader>
         {species ? `${species}ki` : ""}
       </AnimalsListViewHeader>
-      <AnimalsList animalsList={animalsList ? animalsList : []} />
+      {animalsList ? (
+        <AnimalsList animalsList={animalsList} />
+      ) : (
+        <NoAnimalsInformation>
+          Obecnie nie ma zwierzaków do wyświetlenia
+        </NoAnimalsInformation>
+      )}
     </AnimalsListViewWrapper>
   );
 };

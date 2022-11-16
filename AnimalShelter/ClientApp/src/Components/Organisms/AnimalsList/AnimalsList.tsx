@@ -23,7 +23,8 @@ const AnimalsList = (props: Props) => {
 
   const renderListElements = (animalsList: AnimalForAdoption[]) => {
     return animalsList.map((animal) => {
-      const { id, name, description, weight, age, species, gender } = animal;
+      const { id, name, description, weight, age, species, gender, race } =
+        animal;
       return (
         <AnimalsListElement key={id}>
           <AnimalsListElementHeader>{name}</AnimalsListElementHeader>
@@ -36,6 +37,7 @@ const AnimalsList = (props: Props) => {
             <AnimalsListElementPhoto src={animal.photo} alt={"Animal photo"} />
           )}
           <AnimalsListElementAnimalInfoWrapper>
+            <AnimalsListElementAnimalInfo>{`Rasa: ${race}`}</AnimalsListElementAnimalInfo>
             <AnimalsListElementAnimalInfo>{`Płeć: ${gender}`}</AnimalsListElementAnimalInfo>
             <AnimalsListElementAnimalInfo>{`Waga: ${weight} Kg`}</AnimalsListElementAnimalInfo>
             <AnimalsListElementAnimalInfo>{`Wiek: ${age} ${Utils.getAgeEnding(

@@ -14,4 +14,5 @@ export type AnimalForAdoption = {
   weight: number;
   age: number;
   gender: string;
+  race: string;
 };

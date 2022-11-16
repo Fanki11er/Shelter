@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { StyledTheme } from "../GlobalStyles/theme";
 
 export const MainTemplateWrapper = styled.div`
   width: 100%;
@@ -6,4 +7,6 @@ export const MainTemplateWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 65px 1fr 65px;
+  background-color: ${(props: StyledTheme) =>
+    props.theme.colors.backgroundLightGray};
 `;
