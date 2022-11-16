@@ -37,11 +37,13 @@ const AnimalsList = (props: Props) => {
             <AnimalsListElementPhoto src={animal.photo} alt={"Animal photo"} />
           )}
           <AnimalsListElementAnimalInfoWrapper>
+            <AnimalsListElementAnimalInfo>{`Numer: ${id}`}</AnimalsListElementAnimalInfo>
             <AnimalsListElementAnimalInfo>{`Rasa: ${race}`}</AnimalsListElementAnimalInfo>
             <AnimalsListElementAnimalInfo>{`Płeć: ${gender}`}</AnimalsListElementAnimalInfo>
             <AnimalsListElementAnimalInfo>{`Waga: ${weight} Kg`}</AnimalsListElementAnimalInfo>
             <AnimalsListElementAnimalInfo>{`Wiek: ${age} ${Utils.getAgeEnding(
-              age
+              age,
+              ["rok", "lata", "lat"]
             )}`}</AnimalsListElementAnimalInfo>
           </AnimalsListElementAnimalInfoWrapper>
           <AnimalsListElementContent>{description}</AnimalsListElementContent>

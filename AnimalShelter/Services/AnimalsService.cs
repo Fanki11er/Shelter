@@ -1,5 +1,7 @@
 ﻿using AnimalShelter.Entities;
 using AnimalShelter.Models;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace AnimalShelter.Services
 {
@@ -7,15 +9,18 @@ namespace AnimalShelter.Services
     public interface IAnimalsService
     {
         public AnimalsAmountDto GetAnimalsToAdoptionAmout();
+        public IEnumerable<FullAnimalInfoDto> GetAnimalsList(string species);
 
     }
 
     public class AnimalsService: IAnimalsService
     {
         private readonly AnimalShelterDbContext _dbContext;
-        public AnimalsService(AnimalShelterDbContext dbContext)
+        private readonly IMapper _mapper;
+        public AnimalsService(AnimalShelterDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         public AnimalsAmountDto GetAnimalsToAdoptionAmout()
@@ -28,6 +33,18 @@ namespace AnimalShelter.Services
                 DogsAmount = dogsNumber,
                 CatsAmount = catsNumber,
             };
+        }
+
+        public  IEnumerable<FullAnimalInfoDto> GetAnimalsList(string species)
+        {
+            var animalsList = _dbContext.Animals
+                .Include(r => r.Race)
+                .Include(s => s.Species)
+                .Include(g => g.Gender)
+                .Where(a => a.Species.Value == species && a.Adoption == null);
+           
+            return _mapper.Map<List<FullAnimalInfoDto>>(animalsList);
+           
         }
     }
 }

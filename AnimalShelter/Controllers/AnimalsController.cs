@@ -21,6 +21,14 @@ namespace AnimalShelter.Controllers
             return Ok(animalsAmount);
         }
 
+        [HttpGet("List/{species}")]
+
+        public ActionResult<IEnumerable<FullAnimalInfoDto>> GetAnimalsToAdoptionAmout([FromRoute] string species)
+        {
+            var animalsList = _animalsService.GetAnimalsList(species);
+            return Ok(animalsList);
+        }
+
 
 
     }

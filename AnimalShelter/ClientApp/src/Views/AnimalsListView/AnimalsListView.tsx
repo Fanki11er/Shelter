@@ -20,7 +20,7 @@ const AnimalsListView = () => {
   useEffect(() => {
     if (species) {
       axios
-        .get(`https://localhost:7121/Animal/${species}`)
+        .get(`https://localhost:7121/Animal/List/${species}`)
         .then((response) => {
           const data = response.data as any;
           setAnimalsList(data);

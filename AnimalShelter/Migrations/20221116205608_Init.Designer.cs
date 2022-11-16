@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AnimalShelter.Migrations
 {
     [DbContext(typeof(AnimalShelterDbContext))]
-    [Migration("20221113145435_Init")]
+    [Migration("20221116205608_Init")]
     partial class Init
     {
         /// <inheritdoc />
