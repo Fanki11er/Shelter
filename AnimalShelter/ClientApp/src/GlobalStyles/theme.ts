@@ -7,6 +7,7 @@ export const theme: Theme = {
   },
   fontSizes: {
     small: "12px",
+    medium: "16px",
   },
   gradients: {
     mainPinkGRadient: "45deg, rgba(201, 132, 132, 0.2), rgba(201, 132, 132, 1)",
@@ -18,6 +19,9 @@ export const theme: Theme = {
     medium: `min-width: 640px`,
     large: `min-width: 1000px`,
     veryLarge: "min-width: 2500px",
+  },
+  fontFamily: {
+    inter: "Inter",
   },
 };
 
@@ -34,12 +38,16 @@ export type Theme = {
   };
   fontSizes: {
     small: string;
+    medium: string;
   };
 
   devices: {
     medium: string;
     large: string;
     veryLarge: string;
+  };
+  fontFamily: {
+    inter: string;
   };
 };
 
