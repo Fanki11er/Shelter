@@ -11,7 +11,7 @@ export const RegistrationFormWrapper = styled(Form)`
   border-radius: 10px;
   padding: 20px 40px;
   display: grid;
-  grid-template-rows: 30px 70px 70px 70px 70px 70px;
+  grid-template-rows: 30px 70px 70px 70px 70px 70px 70px;
   grid-row-gap: 15px;
   align-self: center;
   justify-items: center;

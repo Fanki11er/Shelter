@@ -4,6 +4,7 @@ import Pawn from "../../Assets/Images/Pawn.svg";
 
 export const MainViewWrapper = styled.div`
   width: 100%;
+  max-width: 1500px;
   height: 100%;
   background-color: ${(props: StyledTheme) =>
     props.theme.colors.backgroundLightGray};

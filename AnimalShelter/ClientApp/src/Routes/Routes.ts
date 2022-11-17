@@ -4,4 +4,5 @@ export const routes = {
   registration: "/Registration",
   animalsList: "/AnimalsList",
   statistics: "/Statistics",
+  options: "/Options",
 };
