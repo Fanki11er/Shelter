@@ -22,7 +22,7 @@ const AnimalsListView = () => {
       axios
         .get(`https://localhost:7121/Animal/List/${species}`)
         .then((response) => {
-          const data = response.data as any;
+          const data = response.data as AnimalForAdoption[];
           setAnimalsList(data);
         })
         .catch((e) => {

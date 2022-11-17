@@ -16,3 +16,17 @@ export type AnimalForAdoption = {
   gender: string;
   race: string;
 };
+
+export type AddAnimalFormOptionsList = {
+  species: SelectOption[];
+  races: SelectOption[];
+  genders: SelectOption[];
+  boxes: SelectOption[];
+  dens: SelectOption[];
+};
+
+export type SelectOption = {
+  id: number;
+  value: string;
+  additionalValue: number;
+};
