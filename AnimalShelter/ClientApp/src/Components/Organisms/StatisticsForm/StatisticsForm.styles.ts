@@ -10,7 +10,7 @@ export const StatisticsFormWrapper = styled.div`
   border-radius: 10px;
   padding: 20px 40px;
   display: grid;
-  grid-template-rows: 30px 50px 50px 50px 50px 50px 50px;
+  grid-template-rows: 30px 50px 50px 50px 50px 50px 50px 80px;
   grid-row-gap: 15px;
   align-self: center;
   justify-items: center;

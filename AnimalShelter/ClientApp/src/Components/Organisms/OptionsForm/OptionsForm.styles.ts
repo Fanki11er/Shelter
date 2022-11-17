@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import { Form } from "formik";
 import { StyledTheme } from "../../../GlobalStyles/theme";
 
-export const LoginFormWrapper = styled(Form)`
-  width: 600px;
+export const OptionsFormWrapper = styled.div`
+  width: 900px;
   height: auto;
   background-image: linear-gradient(
     ${(props: StyledTheme) => props.theme.gradients.mainPinkGRadient}
@@ -11,17 +10,24 @@ export const LoginFormWrapper = styled(Form)`
   border-radius: 10px;
   padding: 20px 40px;
   display: grid;
-  grid-template-rows: 30px 70px 70px 70px;
+  grid-template-rows: 30px 50px 50px 50px;
   grid-row-gap: 15px;
   align-self: center;
   justify-items: center;
   align-items: center;
   justify-content: center;
+  position: relative;
 `;
 
-export const LoginHeader = styled.h2`
-  display: flex;
-  justify-content: center;
+export const OptionsHeader = styled.h2`
   font-family: ${(props: StyledTheme) => props.theme.fontFamily.inter};
   font-weight: normal;
+`;
+
+export const ImgOptions = styled.img`
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  top: 30px;
+  left: 30px;
 `;
