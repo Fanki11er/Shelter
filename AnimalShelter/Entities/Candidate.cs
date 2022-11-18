@@ -8,7 +8,8 @@
         //Relations
         public int Address_Id { get; set; }
         public Address Address { get; set; }
-
         public List<Adoption> Adoprions { get; set; } = new List<Adoption>();
+        public CandidateRequirement CandidateRequirement { get; set; }
+
     }
 }
