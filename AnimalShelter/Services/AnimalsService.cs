@@ -10,6 +10,7 @@ namespace AnimalShelter.Services
     {
         public AnimalsAmountDto GetAnimalsToAdoptionAmout();
         public IEnumerable<FullAnimalInfoDto> GetAnimalsList(string species);
+        public AddAnimalFormOptionsListDto GetOptionsList();
 
     }
 
@@ -45,6 +46,21 @@ namespace AnimalShelter.Services
            
             return _mapper.Map<List<FullAnimalInfoDto>>(animalsList);
            
+        }
+
+        public AddAnimalFormOptionsListDto GetOptionsList()
+        {
+
+            var freeDens = _dbContext.Dens.Include(a => a.Animal).Where(d => d.Animal == null);
+
+            return new AddAnimalFormOptionsListDto()
+            {
+                Species = _mapper.Map<List<SelectOptionDto>>(_dbContext.Species),
+                Races = _mapper.Map<List<SelectOptionDto>>(_dbContext.Races),
+                Genders = _mapper.Map<List<SelectOptionDto>>(_dbContext.Genders),
+                Boxes = _mapper.Map<List<SelectOptionDto>>(_dbContext.Boxes),
+                Dens = _mapper.Map<List<SelectOptionDto>>(freeDens),
+            };
         }
     }
 }

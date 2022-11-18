@@ -29,7 +29,13 @@ namespace AnimalShelter.Controllers
             return Ok(animalsList);
         }
 
-
+        [HttpGet("Options")]
+        public ActionResult<AddAnimalFormOptionsListDto> GetOptionsList()
+        {
+            return _animalsService.GetOptionsList();
+        }
 
     }
 }
+
+
