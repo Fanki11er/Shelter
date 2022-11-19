@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AnimalShelter.Migrations
 {
     [DbContext(typeof(AnimalShelterDbContext))]
-    [Migration("20221113145435_Init")]
+    [Migration("20221118220159_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -38,7 +38,7 @@ namespace AnimalShelter.Migrations
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
@@ -46,11 +46,11 @@ namespace AnimalShelter.Migrations
 
                     b.Property<string>("PostalCode")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(6)");
 
                     b.Property<string>("Street")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -105,14 +105,14 @@ namespace AnimalShelter.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("Gender_id")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<int>("Race_id")
                         .HasColumnType("int");
@@ -135,6 +135,29 @@ namespace AnimalShelter.Migrations
                     b.HasIndex("Species_Id");
 
                     b.ToTable("Animals");
+                });
+
+            modelBuilder.Entity("AnimalShelter.Entities.AnimalCandidateRequirements", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CandidateRequirementId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CharacteristicId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CandidateRequirementId");
+
+                    b.HasIndex("CharacteristicId");
+
+                    b.ToTable("AnimalCandidateRequirements");
                 });
 
             modelBuilder.Entity("AnimalShelter.Entities.AnimalFuture", b =>
@@ -191,11 +214,40 @@ namespace AnimalShelter.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Candidates");
+                });
+
+            modelBuilder.Entity("AnimalShelter.Entities.CandidateRequirement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CandidateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GenderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SpeciesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CandidateId")
+                        .IsUnique();
+
+                    b.HasIndex("GenderId");
+
+                    b.HasIndex("SpeciesId");
+
+                    b.ToTable("CandidateRequirements");
                 });
 
             modelBuilder.Entity("AnimalShelter.Entities.Characteristic", b =>
@@ -208,7 +260,7 @@ namespace AnimalShelter.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
@@ -243,7 +295,7 @@ namespace AnimalShelter.Migrations
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("Id");
 
@@ -263,7 +315,7 @@ namespace AnimalShelter.Migrations
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -282,7 +334,7 @@ namespace AnimalShelter.Migrations
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("Id");
 
@@ -299,15 +351,15 @@ namespace AnimalShelter.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(12)");
 
                     b.HasKey("Id");
 
@@ -377,6 +429,25 @@ namespace AnimalShelter.Migrations
                     b.Navigation("Species");
                 });
 
+            modelBuilder.Entity("AnimalShelter.Entities.AnimalCandidateRequirements", b =>
+                {
+                    b.HasOne("AnimalShelter.Entities.CandidateRequirement", "CandidateRequirement")
+                        .WithMany("AnimalCandidateRequirements")
+                        .HasForeignKey("CandidateRequirementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AnimalShelter.Entities.Characteristic", "Characteristic")
+                        .WithMany("AnimalCandidateRequirements")
+                        .HasForeignKey("CharacteristicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CandidateRequirement");
+
+                    b.Navigation("Characteristic");
+                });
+
             modelBuilder.Entity("AnimalShelter.Entities.AnimalFuture", b =>
                 {
                     b.HasOne("AnimalShelter.Entities.Animal", "Animal")
@@ -403,6 +474,33 @@ namespace AnimalShelter.Migrations
                         .HasForeignKey("Species_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Species");
+                });
+
+            modelBuilder.Entity("AnimalShelter.Entities.CandidateRequirement", b =>
+                {
+                    b.HasOne("AnimalShelter.Entities.Candidate", "Candidate")
+                        .WithOne("CandidateRequirement")
+                        .HasForeignKey("AnimalShelter.Entities.CandidateRequirement", "CandidateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AnimalShelter.Entities.Gender", "Gender")
+                        .WithMany("CandidateRequirements")
+                        .HasForeignKey("GenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AnimalShelter.Entities.Species", "Species")
+                        .WithMany("CandidateRequirements")
+                        .HasForeignKey("SpeciesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Candidate");
+
+                    b.Navigation("Gender");
 
                     b.Navigation("Species");
                 });
@@ -447,10 +545,20 @@ namespace AnimalShelter.Migrations
                         .IsRequired();
 
                     b.Navigation("Adoprions");
+
+                    b.Navigation("CandidateRequirement")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AnimalShelter.Entities.CandidateRequirement", b =>
+                {
+                    b.Navigation("AnimalCandidateRequirements");
                 });
 
             modelBuilder.Entity("AnimalShelter.Entities.Characteristic", b =>
                 {
+                    b.Navigation("AnimalCandidateRequirements");
+
                     b.Navigation("AnimalsFutures");
                 });
 
@@ -462,6 +570,8 @@ namespace AnimalShelter.Migrations
             modelBuilder.Entity("AnimalShelter.Entities.Gender", b =>
                 {
                     b.Navigation("Animals");
+
+                    b.Navigation("CandidateRequirements");
                 });
 
             modelBuilder.Entity("AnimalShelter.Entities.Race", b =>
@@ -474,6 +584,8 @@ namespace AnimalShelter.Migrations
                     b.Navigation("Animals");
 
                     b.Navigation("Boxes");
+
+                    b.Navigation("CandidateRequirements");
 
                     b.Navigation("Races");
                 });

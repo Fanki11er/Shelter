@@ -11,6 +11,7 @@ export const AnimalsListWrapper = styled.ul`
   background-image: linear-gradient(
     ${(props: StyledTheme) => props.theme.gradients.mainPinkGradientReversed}
   );
+  border-radius: 15px;
 `;
 
 export const AnimalsListElement = styled.li`
@@ -29,6 +30,7 @@ export const AnimalsListElementPhotoPlaceholder = styled.img`
   width: 100%;
   height: 100%;
   grid-column: 1/2;
+  border-radius: 5px;
 `;
 
 export const AnimalsListElementPhoto = styled.img`

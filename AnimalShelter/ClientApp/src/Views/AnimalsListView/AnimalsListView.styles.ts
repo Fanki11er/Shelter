@@ -16,3 +16,5 @@ export const AnimalsListViewHeader = styled.h2`
   height: fit-content;
   margin: 40px 0;
 `;
+
+export const NoAnimalsInformation = styled.h2``;

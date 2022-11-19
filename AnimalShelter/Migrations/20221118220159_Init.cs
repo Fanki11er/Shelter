@@ -17,7 +17,7 @@ namespace AnimalShelter.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     AddressId = table.Column<int>(name: "Address_Id", type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -31,7 +31,7 @@ namespace AnimalShelter.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(30)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,7 +44,7 @@ namespace AnimalShelter.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Value = table.Column<string>(type: "nvarchar(10)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,7 +57,7 @@ namespace AnimalShelter.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Value = table.Column<string>(type: "nvarchar(10)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,9 +70,9 @@ namespace AnimalShelter.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(12)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -85,10 +85,10 @@ namespace AnimalShelter.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    Street = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PostalCode = table.Column<string>(type: "nvarchar(6)", nullable: false),
                     CandidateId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -122,12 +122,45 @@ namespace AnimalShelter.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CandidateRequirements",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SpeciesId = table.Column<int>(type: "int", nullable: false),
+                    GenderId = table.Column<int>(type: "int", nullable: false),
+                    CandidateId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CandidateRequirements", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CandidateRequirements_Candidates_CandidateId",
+                        column: x => x.CandidateId,
+                        principalTable: "Candidates",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CandidateRequirements_Genders_GenderId",
+                        column: x => x.GenderId,
+                        principalTable: "Genders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CandidateRequirements_Species_SpeciesId",
+                        column: x => x.SpeciesId,
+                        principalTable: "Species",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Races",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     SpeciesId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -161,15 +194,41 @@ namespace AnimalShelter.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AnimalCandidateRequirements",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CandidateRequirementId = table.Column<int>(type: "int", nullable: false),
+                    CharacteristicId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AnimalCandidateRequirements", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AnimalCandidateRequirements_CandidateRequirements_CandidateRequirementId",
+                        column: x => x.CandidateRequirementId,
+                        principalTable: "CandidateRequirements",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AnimalCandidateRequirements_Characteristics_CharacteristicId",
+                        column: x => x.CharacteristicId,
+                        principalTable: "Characteristics",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Animals",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(30)", nullable: false),
                     Weight = table.Column<int>(type: "int", nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(200)", nullable: false),
                     SpeciesId = table.Column<int>(name: "Species_Id", type: "int", nullable: false),
                     Raceid = table.Column<int>(name: "Race_id", type: "int", nullable: false),
                     Genderid = table.Column<int>(name: "Gender_id", type: "int", nullable: false),
@@ -273,6 +332,16 @@ namespace AnimalShelter.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_AnimalCandidateRequirements_CandidateRequirementId",
+                table: "AnimalCandidateRequirements",
+                column: "CandidateRequirementId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AnimalCandidateRequirements_CharacteristicId",
+                table: "AnimalCandidateRequirements",
+                column: "CharacteristicId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AnimalFutures_Animal_Id",
                 table: "AnimalFutures",
                 column: "Animal_Id");
@@ -309,6 +378,22 @@ namespace AnimalShelter.Migrations
                 column: "Species_id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CandidateRequirements_CandidateId",
+                table: "CandidateRequirements",
+                column: "CandidateId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CandidateRequirements_GenderId",
+                table: "CandidateRequirements",
+                column: "GenderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CandidateRequirements_SpeciesId",
+                table: "CandidateRequirements",
+                column: "SpeciesId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Dens_Box_Id",
                 table: "Dens",
                 column: "Box_Id");
@@ -329,19 +414,25 @@ namespace AnimalShelter.Migrations
                 name: "Adreses");
 
             migrationBuilder.DropTable(
+                name: "AnimalCandidateRequirements");
+
+            migrationBuilder.DropTable(
                 name: "AnimalFutures");
 
             migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Candidates");
+                name: "CandidateRequirements");
 
             migrationBuilder.DropTable(
                 name: "Animals");
 
             migrationBuilder.DropTable(
                 name: "Characteristics");
+
+            migrationBuilder.DropTable(
+                name: "Candidates");
 
             migrationBuilder.DropTable(
                 name: "Dens");

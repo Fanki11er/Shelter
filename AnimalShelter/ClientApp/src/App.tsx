@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { routes } from "./Routes/Routes";
 import MainTemplate from "./Template/MainTemplate";
 import AnimalAdoptionView from "./Views/AnimalAdoptionView/AnimalAdoptionView";
+import AddAnimalFormView from "./Views/AddAnimalFormView/AddAnimalFormView";
 import AnimalsListView from "./Views/AnimalsListView/AnimalsListView";
 import LoginView from "./Views/LoginView/LoginView";
 import MainView from "./Views/MainView/MainView";
@@ -18,12 +19,14 @@ const App = () => {
     statistics,
     options,
     adoption,
+    addAnimalForm,
   } = routes;
   return (
     <Routes>
       <Route element={<MainTemplate />}>
         <Route index path={index} element={<MainView />} />
         <Route path={animalsList} element={<AnimalsListView />} />
+        <Route path={addAnimalForm} element={<AddAnimalFormView />} />
         <Route path={"*"} element={<MainView />} />
         <Route path={registration} element={<RegistrationView />} />
         <Route path={login} element={<LoginView />} />

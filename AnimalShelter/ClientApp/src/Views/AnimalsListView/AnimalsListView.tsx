@@ -6,6 +6,7 @@ import { AnimalForAdoption, Species } from "../../Types/types";
 import {
   AnimalsListViewHeader,
   AnimalsListViewWrapper,
+  NoAnimalsInformation,
 } from "./AnimalsListView.styles";
 
 const AnimalsListView = () => {
@@ -19,9 +20,9 @@ const AnimalsListView = () => {
   useEffect(() => {
     if (species) {
       axios
-        .get(`https://localhost:7121/Animal/${species}`)
+        .get(`https://localhost:7121/Animal/List/${species}`)
         .then((response) => {
-          const data = response.data as any;
+          const data = response.data as AnimalForAdoption[];
           setAnimalsList(data);
         })
         .catch((e) => {
@@ -35,7 +36,13 @@ const AnimalsListView = () => {
       <AnimalsListViewHeader>
         {species ? `${species}ki` : ""}
       </AnimalsListViewHeader>
-      <AnimalsList animalsList={animalsList ? animalsList : []} />
+      {animalsList ? (
+        <AnimalsList animalsList={animalsList} />
+      ) : (
+        <NoAnimalsInformation>
+          Obecnie nie ma zwierzaków do wyświetlenia
+        </NoAnimalsInformation>
+      )}
     </AnimalsListViewWrapper>
   );
 };
