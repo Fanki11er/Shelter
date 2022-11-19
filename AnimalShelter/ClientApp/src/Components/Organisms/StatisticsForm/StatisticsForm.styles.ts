@@ -27,9 +27,11 @@ export const TextStatistics = styled.span`
   width: 700px;
   font-family: ${(props: StyledTheme) => props.theme.fontFamily.inter};
   font-weight: normal;
-  border: 2px solid ${(props: StyledTheme) => props.theme.colors.frame};
+  border: 3px solid ${(props: StyledTheme) => props.theme.colors.frame};
   border-radius: 10px;
   padding: 10px;
   display: flex;
   justify-content: center;
+  background-color: ${(props: StyledTheme) =>
+    props.theme.colors.backgroundLightGray};
 `;
