@@ -1,10 +1,20 @@
 import { Formik } from "formik";
-import { AddAnimalFormOptionsList } from "../../../Types/types";
+import { AddAnimalFormOptionsList, SelectOption } from "../../../Types/types";
+import { LongButton } from "../../Atoms/Buttons/Buttons";
+import AddPhotoField from "../../Molecules/AddPhotoField/AddPhotoField";
+import CheckboxField from "../../Molecules/CheckboxField/CheckboxField";
 import DependableSelectInputField from "../../Molecules/DependentSelectInputField/DependentSelectInputField";
 import SelectInputField from "../../Molecules/SelectInputField/SelectInputField";
+import TextAreaField from "../../Molecules/TextAreaField/TextAreaField";
 import {
+  AddAnimalFormHeader,
   AddAnimalFormWrapper,
+  AddPhotoWrapper,
+  CheckboxGroupWrapper,
   LeftInputsWrapper,
+  PhotoPreviewPlaceholder,
+  RightInputsWrapper,
+  SubmitButtonWrapper,
 } from "./AddAnimalForm.styles";
 
 export interface MyFormValues {
@@ -13,6 +23,9 @@ export interface MyFormValues {
   gender: number;
   box: number;
   den: number;
+  characteristics: string[];
+  description: string;
+  photo: any;
 }
 
 export type FormDependableValues = "species" | "box";
@@ -30,6 +43,23 @@ const AddAnimalForm = (props: Props) => {
     gender: 0,
     box: 0,
     den: 0,
+    characteristics: [],
+    description: "",
+    photo: "",
+  };
+
+  const renderCheckboxes = (characteristicsList: SelectOption[]) => {
+    return characteristicsList.map((characteristic) => {
+      const { id, value } = characteristic;
+      return (
+        <CheckboxField
+          name={"characteristics"}
+          value={id.toString()}
+          label={value}
+          key={id}
+        />
+      );
+    });
   };
 
   const handleSubmit = async (values: MyFormValues) => {
@@ -46,6 +76,7 @@ const AddAnimalForm = (props: Props) => {
       }}
     >
       <AddAnimalFormWrapper>
+        <AddAnimalFormHeader>Dodaj lokatora</AddAnimalFormHeader>
         <LeftInputsWrapper>
           <SelectInputField
             label="Wybierz gatunek"
@@ -86,6 +117,20 @@ const AddAnimalForm = (props: Props) => {
             valueName={"box"}
           />
         </LeftInputsWrapper>
+        <RightInputsWrapper>
+          <AddPhotoWrapper>
+            <PhotoPreviewPlaceholder />
+            <AddPhotoField name="photo" label="Wybierz zdjecie" />
+          </AddPhotoWrapper>
+          <TextAreaField name={"description"} label={"Opis zwierzęcia"} />
+        </RightInputsWrapper>
+        <CheckboxGroupWrapper>
+          {optionsList.characteristics.length &&
+            renderCheckboxes(optionsList.characteristics)}
+        </CheckboxGroupWrapper>
+        <SubmitButtonWrapper>
+          <LongButton type={"submit"}>Submit</LongButton>
+        </SubmitButtonWrapper>
       </AddAnimalFormWrapper>
     </Formik>
   );

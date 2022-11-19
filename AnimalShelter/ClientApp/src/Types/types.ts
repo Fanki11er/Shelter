@@ -23,6 +23,7 @@ export type AddAnimalFormOptionsList = {
   genders: SelectOption[];
   boxes: SelectOption[];
   dens: SelectOption[];
+  characteristics: SelectOption[];
 };
 
 export type SelectOption = {
