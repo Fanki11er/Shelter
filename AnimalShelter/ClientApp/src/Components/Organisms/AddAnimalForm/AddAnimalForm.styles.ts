@@ -6,7 +6,7 @@ export const AddAnimalFormWrapper = styled(Form)`
   width: 1100px;
   height: auto;
   display: grid;
-  grid-template-columns: 300px 700px;
+  grid-template-columns: 300px 300px 400px;
   grid-row-gap: 40px;
   padding: 50px;
   background-image: linear-gradient(
@@ -14,6 +14,7 @@ export const AddAnimalFormWrapper = styled(Form)`
   );
   margin: 50px 0;
   border-radius: 15px;
+  font-family: ${(props: StyledTheme) => props.theme.fontFamily.inter};
 `;
 
 export const LeftInputsWrapper = styled.div`
@@ -34,6 +35,7 @@ export const RightInputsWrapper = styled.div`
   grid-auto-rows: auto;
   grid-row-gap: 60px;
   justify-items: flex-start;
+  grid-column: 3/4;
 `;
 
 export const CheckboxGroupWrapper = styled.div`
@@ -49,7 +51,7 @@ export const CheckboxGroupWrapper = styled.div`
   background-color: ${(props: StyledTheme) =>
     props.theme.colors.backgroundLightGray};
   border-radius: 10px;
-  grid-column: 1 /3;
+  grid-column: 1 /4;
 `;
 
 export const SubmitButtonWrapper = styled.div`
@@ -57,7 +59,7 @@ export const SubmitButtonWrapper = styled.div`
   height: auto;
   display: flex;
   justify-content: center;
-  grid-column: 1/3;
+  grid-column: 1/4;
 `;
 
 export const AddPhotoWrapper = styled.div`
@@ -81,7 +83,27 @@ export const PhotoPreviewPlaceholder = styled.div`
   justify-self: flex-end;
 `;
 
+export const PhotoPreview = styled.img`
+  width: 220px;
+  height: 220px;
+  border-radius: 10px;
+  display: flex;
+  justify-self: flex-end;
+`;
+
 export const AddAnimalFormHeader = styled.h2`
-  grid-column: 1/3;
+  grid-column: 1/4;
   justify-self: center;
+`;
+
+export const NumberFieldsWrapper = styled.div`
+  width: 100%;
+  display: grid;
+  grid-row-gap: 30px;
+  grid-template-columns: 100%;
+  grid-auto-rows: 80px;
+  justify-items: flex-end;
+  grid-column: 2/3;
+  align-items: flex-start;
+  padding: 10px 0;
 `;

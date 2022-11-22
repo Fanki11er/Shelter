@@ -30,6 +30,7 @@ export const AddPhotoFieldLabel = styled.label`
   justify-content: center;
   align-items: center;
   transition: all 0.5s;
+  border-radius: 10px;
   background-color: ${(props: StyledTheme) => props.theme.colors.black};
   :hover {
     color: ${(props: StyledTheme) => props.theme.colors.orange};

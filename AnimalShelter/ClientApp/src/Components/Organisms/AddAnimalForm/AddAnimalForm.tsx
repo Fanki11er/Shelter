@@ -1,9 +1,16 @@
+import axios from "axios";
 import { Formik } from "formik";
-import { AddAnimalFormOptionsList, SelectOption } from "../../../Types/types";
+import { useState } from "react";
+import {
+  AddAnimalFormOptionsList,
+  CreateAnimalDto,
+  SelectOption,
+} from "../../../Types/types";
 import { LongButton } from "../../Atoms/Buttons/Buttons";
 import AddPhotoField from "../../Molecules/AddPhotoField/AddPhotoField";
 import CheckboxField from "../../Molecules/CheckboxField/CheckboxField";
 import DependableSelectInputField from "../../Molecules/DependentSelectInputField/DependentSelectInputField";
+import InputField from "../../Molecules/InputField/InputField";
 import SelectInputField from "../../Molecules/SelectInputField/SelectInputField";
 import TextAreaField from "../../Molecules/TextAreaField/TextAreaField";
 import {
@@ -12,12 +19,18 @@ import {
   AddPhotoWrapper,
   CheckboxGroupWrapper,
   LeftInputsWrapper,
+  NumberFieldsWrapper,
+  PhotoPreview,
   PhotoPreviewPlaceholder,
   RightInputsWrapper,
   SubmitButtonWrapper,
 } from "./AddAnimalForm.styles";
+//import FormData from "form-data";
 
 export interface MyFormValues {
+  name: string;
+  age: number;
+  weight: number;
   species: number;
   race: number;
   gender: number;
@@ -25,7 +38,7 @@ export interface MyFormValues {
   den: number;
   characteristics: string[];
   description: string;
-  photo: any;
+  //photo: File | "";
 }
 
 export type FormDependableValues = "species" | "box";
@@ -36,8 +49,12 @@ type Props = {
 
 const AddAnimalForm = (props: Props) => {
   const { optionsList } = props;
+  const [image, setImage] = useState<string>("");
 
   const initialValues: MyFormValues = {
+    name: "",
+    age: 0,
+    weight: 0,
     species: 0,
     race: 0,
     gender: 0,
@@ -45,7 +62,11 @@ const AddAnimalForm = (props: Props) => {
     den: 0,
     characteristics: [],
     description: "",
-    photo: "",
+    // photo: "",
+  };
+
+  const handleAddImage = (imageSrc: string) => {
+    setImage(imageSrc);
   };
 
   const renderCheckboxes = (characteristicsList: SelectOption[]) => {
@@ -62,9 +83,67 @@ const AddAnimalForm = (props: Props) => {
     });
   };
 
-  const handleSubmit = async (values: MyFormValues) => {
-    console.log(values);
+  const validateForm = (values: MyFormValues) => {
+    const entries = Object.values(values);
+    for (let i = 0; i < entries.length; i++) {
+      if (!entries[i]) {
+        return false;
+      }
+      if (values.age < 0 || values.weight < 0) {
+        return false;
+      }
+      return true;
+    }
   };
+
+  const convertCharacteristics = (characteristics: string[]) => {
+    const convertedCharacteristics: number[] = [];
+    characteristics.forEach((ch) => {
+      convertedCharacteristics.push(Number(ch));
+    });
+    return convertedCharacteristics;
+  };
+
+  const handleSubmit = async (values: MyFormValues) => {
+    if (validateForm(values)) {
+      const {
+        species,
+        race,
+        gender,
+        den,
+        characteristics,
+        description,
+        name,
+        age,
+        weight,
+      } = values;
+
+      const createAnimalDto = {
+        Name: name,
+        Age: Number(age),
+        Weight: Number(weight),
+        SpeciesId: Number(species),
+        RaceId: Number(race),
+        GenderId: Number(gender),
+        DenId: Number(den),
+        Characteristics: convertCharacteristics(characteristics),
+        Description: description,
+      } as CreateAnimalDto;
+
+      axios
+        .post(`https://localhost:7121/Animal/AddAnimal`, createAnimalDto)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  };
+
+  /*
+         
+           */
 
   return (
     <Formik
@@ -117,10 +196,30 @@ const AddAnimalForm = (props: Props) => {
             valueName={"box"}
           />
         </LeftInputsWrapper>
+        <NumberFieldsWrapper>
+          <InputField name={"name"} label={"Imię"} placeholder={"Podaj imie"} />
+
+          <InputField
+            type={"number"}
+            name={"age"}
+            label={"Wiek"}
+            width={"100px"}
+          />
+          <InputField
+            type={"number"}
+            name={"weight"}
+            label={"Waga"}
+            width={"100px"}
+          />
+        </NumberFieldsWrapper>
         <RightInputsWrapper>
           <AddPhotoWrapper>
-            <PhotoPreviewPlaceholder />
-            <AddPhotoField name="photo" label="Wybierz zdjecie" />
+            {image ? <PhotoPreview src={image} /> : <PhotoPreviewPlaceholder />}
+            <AddPhotoField
+              name="photo"
+              label="Wybierz zdjecie"
+              handleAddImage={handleAddImage}
+            />
           </AddPhotoWrapper>
           <TextAreaField name={"description"} label={"Opis zwierzęcia"} />
         </RightInputsWrapper>

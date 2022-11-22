@@ -31,3 +31,15 @@ export type SelectOption = {
   value: string;
   additionalValue: number;
 };
+
+export type CreateAnimalDto = {
+  Name: string;
+  Weight: number;
+  Age: number;
+  SpeciesId: number;
+  RaceId: number;
+  GenderId: number;
+  DenId: number;
+  Characteristics: number[];
+  Description: string;
+};

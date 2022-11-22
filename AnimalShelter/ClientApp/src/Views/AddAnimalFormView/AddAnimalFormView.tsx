@@ -14,7 +14,6 @@ const AddAnimalFormView = () => {
       .then((response) => {
         const data = response.data as AddAnimalFormOptionsList;
         setOptionsList(data);
-        console.log(data);
       })
       .catch((e) => {
         console.log(e);
