@@ -60,3 +60,14 @@ export type AddCandidateFormOptionsList = {
   genders: SelectOption[];
   characteristics: SelectOption[];
 };
+
+export type AdoptionOptionsList = {
+  candidates: any[];
+  //animals: any[];
+};
+
+export type LightCandidateDto = {
+  id: number;
+  name: string;
+  characteristicsIds: number[];
+};

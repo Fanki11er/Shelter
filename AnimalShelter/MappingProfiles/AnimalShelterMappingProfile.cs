@@ -51,7 +51,21 @@ namespace AnimalShelter.MappingProfiles
                    SpeciesId = dto.SpeciesId,
                    
                 }));
-                
+
+            /* CreateMap<Candidate, LightCandidateDto>()
+                 .ForMember(lc => lc.CandidateRequirements, m => m.MapFrom(c => new LightCandidateRequirements()
+                 {
+                     GenderId = c.CandidateRequirement.GenderId,
+                     SpeciesId = c.CandidateRequirement.SpeciesId,
+
+                 }))
+
+
+                );*/
+
+        
+
+
 
 
 

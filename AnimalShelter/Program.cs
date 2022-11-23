@@ -14,6 +14,7 @@ builder.Services.AddDbContext<AnimalShelterDbContext>(
     );
 builder.Services.AddScoped<IAnimalsService, AnimalsService>();
 builder.Services.AddScoped<ICandidatesService, CandidatesService>();
+builder.Services.AddScoped<IAdoptionsService, AdoptionsService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 

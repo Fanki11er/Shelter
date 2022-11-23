@@ -1,33 +1,38 @@
+import { Form } from "formik";
 import styled from "styled-components";
 import { StyledTheme } from "../../../GlobalStyles/theme";
 
-export const AnimalAdoptionFormWrapper = styled.div`
+export const AnimalAdoptionFormWrapper = styled(Form)`
   width: 1000px;
   height: auto;
   background-image: linear-gradient(
     ${(props: StyledTheme) => props.theme.gradients.mainPinkGRadient}
   );
   border-radius: 10px;
-  padding: 20px 40px;
+  padding: 40px 40px;
   display: grid;
-  grid-template-rows: 30px 200px 50px 50px 50px 50px 50px;
-  grid-row-gap: 15px;
-  align-self: center;
-  align-items: center;
-  justify-content: flex-start;
   grid-template-columns: 1fr;
+  grid-auto-rows: auto;
+  row-gap: 40px;
+  justify-content: center;
   position: relative;
+  font-family: ${(props: StyledTheme) => props.theme.fontFamily.inter};
 `;
 
 export const AnimalAdoptionHeader = styled.h2`
-  font-family: ${(props: StyledTheme) => props.theme.fontFamily.inter};
-  font-weight: normal;
   display: flex;
   justify-self: center;
   margin: 0 auto;
 `;
 
-export const LabelChooseCandidate = styled.label`
+export const LeftPositionInputWrapper = styled.div`
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-items: flex-start;
+`;
+
+/*export const LabelChooseCandidate = styled.label`
   font-family: ${(props: StyledTheme) => props.theme.fontFamily.inter};
   display: flex;
 `;
@@ -67,7 +72,7 @@ export const CheckboxAnimalAdoption = styled.input`
   align-self: center;
   margin: 0 20px;
   border-radius: 5px;
-`;
+`;*/
 
 export const MediumButtonWrapper = styled.div`
   display: flex;
