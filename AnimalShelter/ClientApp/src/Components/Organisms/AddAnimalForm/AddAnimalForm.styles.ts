@@ -55,10 +55,13 @@ export const CheckboxGroupWrapper = styled.div`
 `;
 
 export const SubmitButtonWrapper = styled.div`
-  width: 100%;
+  width: 50%;
   height: auto;
-  display: flex;
+  display: grid;
   justify-content: center;
+  justify-self: center;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 40px;
   grid-column: 1/4;
 `;
 

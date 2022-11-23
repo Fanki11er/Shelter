@@ -21,11 +21,12 @@ import {
   LeftInputsWrapper,
   NumberFieldsWrapper,
   PhotoPreview,
-  PhotoPreviewPlaceholder,
   RightInputsWrapper,
   SubmitButtonWrapper,
 } from "./AddAnimalForm.styles";
-//import FormData from "form-data";
+import dogPlaceholder from "../../../Assets/Images/dogPlaceholder.png";
+import { Link } from "react-router-dom";
+import { routes } from "../../../Routes/Routes";
 
 export interface MyFormValues {
   name: string;
@@ -49,6 +50,7 @@ type Props = {
 
 const AddAnimalForm = (props: Props) => {
   const { optionsList } = props;
+  const { options } = routes;
   const [image, setImage] = useState<string>("");
 
   const initialValues: MyFormValues = {
@@ -141,15 +143,13 @@ const AddAnimalForm = (props: Props) => {
     }
   };
 
-  /*
-         
-           */
-
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={(values, actions) => {
-        handleSubmit(values);
+        handleSubmit(values).then(() => {
+          actions.resetForm();
+        });
 
         actions.setSubmitting(false);
       }}
@@ -214,7 +214,11 @@ const AddAnimalForm = (props: Props) => {
         </NumberFieldsWrapper>
         <RightInputsWrapper>
           <AddPhotoWrapper>
-            {image ? <PhotoPreview src={image} /> : <PhotoPreviewPlaceholder />}
+            {image ? (
+              <PhotoPreview src={image} alt={"Zdjęcie swierzaka"} />
+            ) : (
+              <PhotoPreview src={dogPlaceholder} alt={"Narysowany piesek"} />
+            )}
             <AddPhotoField
               name="photo"
               label="Wybierz zdjecie"
@@ -228,7 +232,10 @@ const AddAnimalForm = (props: Props) => {
             renderCheckboxes(optionsList.characteristics)}
         </CheckboxGroupWrapper>
         <SubmitButtonWrapper>
-          <LongButton type={"submit"}>Submit</LongButton>
+          <LongButton type={"submit"}>Zapisz</LongButton>
+          <LongButton as={Link} to={options}>
+            Powrót
+          </LongButton>
         </SubmitButtonWrapper>
       </AddAnimalFormWrapper>
     </Formik>

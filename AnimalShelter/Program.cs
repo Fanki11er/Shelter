@@ -13,6 +13,7 @@ builder.Services.AddDbContext<AnimalShelterDbContext>(
 
     );
 builder.Services.AddScoped<IAnimalsService, AnimalsService>();
+builder.Services.AddScoped<ICandidatesService, CandidatesService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 

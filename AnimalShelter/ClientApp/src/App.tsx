@@ -9,6 +9,7 @@ import MainView from "./Views/MainView/MainView";
 import OptionsView from "./Views/OptionsView/OptionsView";
 import RegistrationView from "./Views/RegistrationView/RegistrationView";
 import StatisticsView from "./Views/StatisticsView/StatisticsView";
+import AddCandidateView from "./Views/AddCandidateView/AddCandidateView";
 
 const App = () => {
   const {
@@ -20,6 +21,7 @@ const App = () => {
     options,
     adoption,
     addAnimalForm,
+    addCandidateForm,
   } = routes;
   return (
     <Routes>
@@ -27,12 +29,13 @@ const App = () => {
         <Route index path={index} element={<MainView />} />
         <Route path={animalsList} element={<AnimalsListView />} />
         <Route path={addAnimalForm} element={<AddAnimalFormView />} />
-        <Route path={"*"} element={<MainView />} />
         <Route path={registration} element={<RegistrationView />} />
         <Route path={login} element={<LoginView />} />
         <Route path={statistics} element={<StatisticsView />} />
         <Route path={options} element={<OptionsView />} />
         <Route path={adoption} element={<AnimalAdoptionView />} />
+        <Route path={addCandidateForm} element={<AddCandidateView />} />
+        <Route path={"*"} element={<MainView />} />
       </Route>
     </Routes>
   );

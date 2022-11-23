@@ -10,4 +10,11 @@ export const Input = styled(Field)`
   padding: 0 10px;
   background-color: ${(props: StyledTheme) =>
     props.theme.colors.backgroundLightGray};
+  outline: none;
+  border: 2px solid transparent;
+  transition: all 0.5s;
+  :focus,
+  :hover {
+    border: 2px solid ${(props: StyledTheme) => props.theme.colors.black};
+  }
 `;

@@ -35,6 +35,18 @@ namespace AnimalShelter.Controllers
             return _animalsService.GetOptionsList();
         }
 
+        [HttpPost("AddAnimal")]
+        public ActionResult AddAnimal([FromBody] CreateAnimalDto dto)
+        {
+            var index = _animalsService.CreateAnimal(dto);
+            _animalsService.CreateAnimalFutures(dto.Characteristics, index);
+
+
+           
+
+            return Ok();
+        }
+
     }
 }
 

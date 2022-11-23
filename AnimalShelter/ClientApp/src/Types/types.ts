@@ -43,3 +43,20 @@ export type CreateAnimalDto = {
   Characteristics: number[];
   Description: string;
 };
+
+export type CreateCandidateDto = {
+  Name: string;
+  City: string;
+  Street: string;
+  Phone: string;
+  PostalCode: string;
+  Characteristics: number[];
+  SpeciesId: number;
+  GenderId: number;
+};
+
+export type AddCandidateFormOptionsList = {
+  species: SelectOption[];
+  genders: SelectOption[];
+  characteristics: SelectOption[];
+};
