@@ -42,9 +42,13 @@ namespace AnimalShelter.Controllers
             _animalsService.CreateAnimalFutures(dto.Characteristics, index);
 
 
-           
-
             return Ok();
+        }
+
+        [HttpGet("Statistics")]
+        public ActionResult<List<BoxesStatisticsDto>> GetStatisticsList()
+        {
+            return _animalsService.GetStatisticsList();
         }
 
     }

@@ -5,6 +5,8 @@ export const theme: Theme = {
     orange: "orange",
     backgroundLightGray: "rgba(217, 217, 217, 1)",
     frame: "rgba(201, 132,132,1)",
+    red: "rgba(201, 40, 40, 1)",
+    green: "rgba(49, 150, 13, 1)",
   },
   fontSizes: {
     small: "12px",
@@ -33,6 +35,8 @@ export type Theme = {
     orange: string;
     backgroundLightGray: string;
     frame: string;
+    red: string;
+    green: string;
   };
   gradients: {
     mainPinkGRadient: string;

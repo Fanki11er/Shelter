@@ -90,3 +90,9 @@ export type CreateAdoptionDto = {
   AdoptedAnimals: number[];
   CandidateId: number;
 };
+
+export type BoxesStatisticsDto = {
+  information: string;
+  allDens: number;
+  usedDens: number;
+};

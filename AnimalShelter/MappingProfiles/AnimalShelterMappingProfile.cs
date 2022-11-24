@@ -51,8 +51,12 @@ namespace AnimalShelter.MappingProfiles
                    SpeciesId = dto.SpeciesId,
                    
                 }));
+            CreateMap<Box, BoxesStatisticsDto>()
+                .ForMember(bs => bs.Information, m => m.MapFrom(b => $"Box: {b.Id} Gatunek: {b.Species.Value}y Zajęte miejsca:"))
+                .ForMember(bs => bs.AllDens, m => m.MapFrom(d => d.Dens.Count()))
+                .ForMember(bs => bs.UsedDens, m => m.MapFrom(d => d.Dens.Where(dn => dn.Animal != null).Count()));
 
-           
+
         }
     }
 }
