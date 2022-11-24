@@ -95,7 +95,10 @@ namespace AnimalShelter.Services
 
         public List<BoxesStatisticsDto> GetStatisticsList()
         {
-            return _mapper.Map<List<BoxesStatisticsDto>>(_dbContext.Boxes.Include(i => i.Dens).Include(i => i.Species));
+            return _mapper.Map<List<BoxesStatisticsDto>>(_dbContext.Boxes
+                .Include(i => i.Dens)
+                .Include(i => i.Species));
+                
         }
     }
 }

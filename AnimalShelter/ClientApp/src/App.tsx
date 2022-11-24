@@ -10,6 +10,7 @@ import OptionsView from "./Views/OptionsView/OptionsView";
 import RegistrationView from "./Views/RegistrationView/RegistrationView";
 import StatisticsView from "./Views/StatisticsView/StatisticsView";
 import AddCandidateView from "./Views/AddCandidateView/AddCandidateView";
+import AdoptionsHistoryViewW from "./Views/AdoptionsHistoryView/AdoptionsHistoryView";
 
 const App = () => {
   const {
@@ -22,6 +23,7 @@ const App = () => {
     adoption,
     addAnimalForm,
     addCandidateForm,
+    adoptionsHistory,
   } = routes;
   return (
     <Routes>
@@ -35,6 +37,8 @@ const App = () => {
         <Route path={options} element={<OptionsView />} />
         <Route path={adoption} element={<AnimalAdoptionView />} />
         <Route path={addCandidateForm} element={<AddCandidateView />} />
+        <Route path={adoptionsHistory} element={<AdoptionsHistoryViewW />} />
+
         <Route path={"*"} element={<MainView />} />
       </Route>
     </Routes>

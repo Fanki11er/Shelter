@@ -1,21 +1,7 @@
 import styled from "styled-components";
 import { StyledTheme } from "../../../GlobalStyles/theme";
 
-type Amount = {
-  amount: number;
-};
-
-const colorAmount = (amount: number, colors: StyledTheme) => {
-  if (amount > 3) {
-    return colors.theme.colors.green;
-  } else if (amount > 1.5) {
-    return colors.theme.colors.orange;
-  } else {
-    return colors.theme.colors.red;
-  }
-};
-
-export const StatisticsFormWrapper = styled.div`
+export const AdoptionsHistoryListContainer = styled.div`
   width: 1000px;
   height: auto;
   background-image: linear-gradient(
@@ -33,13 +19,13 @@ export const StatisticsFormWrapper = styled.div`
   justify-content: center;
 `;
 
-export const StatisticsHeader = styled.h2`
+export const AdoptionsHistoryListHeader = styled.h2`
   font-family: ${(props: StyledTheme) => props.theme.fontFamily.inter};
   font-weight: normal;
 `;
 
-export const StatisticsList = styled.ul`
-  width: 500px;
+export const AdoptionsHistoryListWrapper = styled.ul`
+  width: 100%;
   height: auto;
   display: grid;
   grid-template-columns: 1fr;
@@ -50,31 +36,28 @@ export const StatisticsList = styled.ul`
   font-family: ${(props: StyledTheme) => props.theme.fontFamily.inter};
 `;
 
-export const TextStatisticsElement = styled.li`
+export const AdoptionsHistoryListElement = styled.li`
   width: 100%;
   border: 3px solid ${(props: StyledTheme) => props.theme.colors.frame};
   border-radius: 10px;
   display: grid;
-  grid-template-columns: 1fr 50px;
+  grid-template-columns: 1fr;
   background-color: ${(props: StyledTheme) =>
     props.theme.colors.backgroundLightGray};
   align-items: center;
   padding: 0 15px;
 `;
 
-export const StatisticInfo = styled.span`
+export const AdoptionHistoryInfo = styled.span`
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
 `;
 
-export const ColoredSpan = styled.span`
-  width: 100%;
-  height: 100%;
+export const NoElementsInfo = styled.h3`
+  width: fit-content;
   display: flex;
-  color: ${(props: StyledTheme & Amount) => colorAmount(props.amount, props)};
+  justify-self: center;
   align-items: center;
-  justify-content: center;
-  font-weight: bold;
 `;

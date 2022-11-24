@@ -8,4 +8,5 @@ export const routes = {
   adoption: "/Adoption",
   addAnimalForm: "/AddAnimalForm",
   addCandidateForm: "/AddCandidateForm",
+  adoptionsHistory: "/AdoptionsHistory",
 };

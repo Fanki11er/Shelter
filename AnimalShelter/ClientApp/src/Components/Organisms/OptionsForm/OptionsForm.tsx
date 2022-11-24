@@ -9,7 +9,13 @@ import { Link } from "react-router-dom";
 import { routes } from "../../../Routes/Routes";
 
 const OptionsForm = () => {
-  const { addAnimalForm, statistics, adoption, addCandidateForm } = routes;
+  const {
+    addAnimalForm,
+    statistics,
+    adoption,
+    addCandidateForm,
+    adoptionsHistory,
+  } = routes;
   return (
     <OptionsFormWrapper>
       <OptionsHeader>Opcje</OptionsHeader>
@@ -24,6 +30,9 @@ const OptionsForm = () => {
       </LongButton>
       <LongButton as={Link} to={statistics}>
         Statystyki
+      </LongButton>
+      <LongButton as={Link} to={adoptionsHistory}>
+        Historia adopcji
       </LongButton>
       <ImgOptions src={OptionsImg} alt="optionsImg" />
     </OptionsFormWrapper>

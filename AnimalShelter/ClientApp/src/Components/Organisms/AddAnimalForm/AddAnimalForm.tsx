@@ -25,7 +25,7 @@ import {
   SubmitButtonWrapper,
 } from "./AddAnimalForm.styles";
 import dogPlaceholder from "../../../Assets/Images/dogPlaceholder.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { routes } from "../../../Routes/Routes";
 
 export interface MyFormValues {
@@ -52,6 +52,7 @@ const AddAnimalForm = (props: Props) => {
   const { optionsList } = props;
   const { options } = routes;
   const [image, setImage] = useState<string>("");
+  const navigate = useNavigate();
 
   const initialValues: MyFormValues = {
     name: "",
@@ -149,6 +150,7 @@ const AddAnimalForm = (props: Props) => {
       onSubmit={(values, actions) => {
         handleSubmit(values).then(() => {
           actions.resetForm();
+          navigate(options, { replace: true });
         });
 
         actions.setSubmitting(false);

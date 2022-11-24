@@ -96,3 +96,7 @@ export type BoxesStatisticsDto = {
   allDens: number;
   usedDens: number;
 };
+
+export type AdoptionsHistoryDto = {
+  information: string;
+};

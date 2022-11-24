@@ -33,5 +33,11 @@ namespace AnimalShelter.Controllers
             return BadRequest();
         }
 
+        [HttpGet("History")]
+        public ActionResult<List<AdoptionsHistoryDto>> GetHistory()
+        {
+            return _adoptionsService.GetHistory();
+        }
+
     }
 }

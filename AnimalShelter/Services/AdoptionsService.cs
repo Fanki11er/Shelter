@@ -11,7 +11,9 @@ namespace AnimalShelter.Services
 
             public AddAdoptionFormOptionsListDto GetOptionsList();
         public bool CreateAdoption(CreateAdoptionDto dto);
-            
+        public List<AdoptionsHistoryDto> GetHistory();
+
+
 
     }
         public class AdoptionsService : IAdoptionsService
@@ -64,7 +66,7 @@ namespace AnimalShelter.Services
         }
         public bool CreateAdoption(CreateAdoptionDto dto)
         {
-            
+
             var adoptions = dto.AdoptedAnimals.Select(aa => new Adoption()
             {
                 Candidate_Id = dto.CandidateId,
@@ -77,18 +79,27 @@ namespace AnimalShelter.Services
             {
                 var animal = _dbContext.Animals.FirstOrDefault(an => an.Id == ad.Animal_Id);
 
-            if (animal != null)
+                if (animal != null)
                 {
                     animal.Den_Id = null;
-                    
+
                 }
-               
+
             });
 
             _dbContext.SaveChanges();
             return adoptions.Count == dto.AdoptedAnimals.Count;
-           
 
+
+
+
+           
+        }
+        public List<AdoptionsHistoryDto> GetHistory()
+        {
+            return _mapper.Map<List<AdoptionsHistoryDto>>(_dbContext.Adoptions
+                .Include(i => i.Animal)
+                .Include(i => i.Candidate));
         }
 
     }

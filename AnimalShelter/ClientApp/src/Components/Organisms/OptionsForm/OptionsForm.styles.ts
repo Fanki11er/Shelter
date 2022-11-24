@@ -8,9 +8,9 @@ export const OptionsFormWrapper = styled.div`
     ${(props: StyledTheme) => props.theme.gradients.mainPinkGRadient}
   );
   border-radius: 10px;
-  padding: 20px 40px;
+  padding: 50px 40px;
   display: grid;
-  grid-template-rows: 30px 50px 50px 50px;
+  grid-auto-rows: 50px;
   grid-row-gap: 15px;
   align-self: center;
   justify-items: center;
