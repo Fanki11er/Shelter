@@ -14,7 +14,6 @@ const AnimalAdoptionView = () => {
       .get(`https://localhost:7121/Adoption/Options`)
       .then((response) => {
         const data = response.data as AdoptionOptionsList;
-        console.log(data);
         setOptionsList(data);
       })
       .catch((e) => {

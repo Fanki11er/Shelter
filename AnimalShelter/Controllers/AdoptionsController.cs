@@ -20,15 +20,18 @@ namespace AnimalShelter.Controllers
             return _adoptionsService.GetOptionsList();
         }
 
-        /*[HttpPost("AddCandidate")]
-        public ActionResult AddCandidate([FromBody] CreateCandidateDto dto)
+        [HttpPost("Adopt")]
+        public ActionResult AddCandidate([FromBody] CreateAdoptionDto dto)
         {
-            var requirementId = _candidatesService.CreateCandidate(dto);
-            _candidatesService.CreateAnimalCandidateRequirements(dto.Characteristics, requirementId);
+          var success =  _adoptionsService.CreateAdoption(dto);
 
 
-            return Ok();
-        }*/
+            if (success)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
 
     }
 }

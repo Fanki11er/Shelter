@@ -1,4 +1,4 @@
-import { MediumButton } from "../../Atoms/Buttons/Buttons";
+import { LongButton } from "../../Atoms/Buttons/Buttons";
 import {
   AnimalAdoptionFormWrapper,
   AnimalAdoptionHeader,
@@ -19,11 +19,13 @@ import SelectInputField from "../../Molecules/SelectInputField/SelectInputField"
 import CheckboxField from "../../Molecules/CheckboxField/CheckboxField";
 import {
   AdoptionOptionsList,
+  CreateAdoptionDto,
   LightCandidateDto,
   SelectOption,
 } from "../../../Types/types";
 import AnimalsListWithFilter from "../../Molecules/AnimalsListWithFilter/AnimalsListWithFilter";
-//import CheckboxField from "../../Molecules/CheckboxField/CheckboxField";
+import { Link } from "react-router-dom";
+import { routes } from "../../../Routes/Routes";
 
 export interface MyFormValues {
   candidateId: number;
@@ -37,6 +39,7 @@ type Props = {
 
 const AnimalAdoptionForm = (props: Props) => {
   const { optionsList } = props;
+  const { options } = routes;
   const initialValues: MyFormValues = {
     candidateId: 0,
     adoptedAnimals: [],
@@ -75,10 +78,10 @@ const AnimalAdoptionForm = (props: Props) => {
     if (validateForm(values)) {
       const { adoptedAnimals, candidateId } = values;
 
-      const createAdoptionDto = {
+      const createAdoptionDto: CreateAdoptionDto = {
         AdoptedAnimals: convertAnimals(adoptedAnimals),
         CandidateId: Number(candidateId),
-      } as any;
+      };
 
       axios
         .post(`https://localhost:7121/Adoption/Adopt`, createAdoptionDto)
@@ -90,20 +93,6 @@ const AnimalAdoptionForm = (props: Props) => {
         });
     }
   };
-
-  /*const renderCheckboxes = (characteristicsList: SelectOption[]) => {
-    return characteristicsList.map((characteristic) => {
-      const { id, value } = characteristic;
-      return (
-        <CheckboxField
-          name={"characteristics"}
-          value={id.toString()}
-          label={value}
-          key={id}
-        />
-      );
-    });
-  };*/
 
   return (
     <Formik
@@ -134,9 +123,15 @@ const AnimalAdoptionForm = (props: Props) => {
             label={"Filtruj według cech"}
           />
         </LeftPositionInputWrapper>
-        <AnimalsListWithFilter animalsList={[]} characteristics={[]} />
+        <AnimalsListWithFilter
+          animalsList={optionsList.animals}
+          candidatesList={optionsList.candidates}
+        />
         <MediumButtonWrapper>
-          <MediumButton type={"submit"}>Zatwierdź</MediumButton>
+          <LongButton type={"submit"}>Zatwierdź</LongButton>
+          <LongButton as={Link} to={options}>
+            Powrót
+          </LongButton>
         </MediumButtonWrapper>
         <AnimalAdoptionImg src={ImgAnimalAdoption} alt="ImgAnimalAdoption" />
       </AnimalAdoptionFormWrapper>

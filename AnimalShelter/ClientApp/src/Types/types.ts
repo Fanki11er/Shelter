@@ -62,12 +62,31 @@ export type AddCandidateFormOptionsList = {
 };
 
 export type AdoptionOptionsList = {
-  candidates: any[];
-  //animals: any[];
+  candidates: LightCandidateDto[];
+  animals: LightAnimalDto[];
 };
 
 export type LightCandidateDto = {
   id: number;
   name: string;
+  candidateRequirements: LightCandidateRequirements;
+};
+
+export type LightAnimalDto = {
+  id: number;
+  description: string;
   characteristicsIds: number[];
+  genderId: number;
+  speciesId: number;
+};
+
+export type LightCandidateRequirements = {
+  genderId: number;
+  speciesId: number;
+  characteristicsIds: number[];
+};
+
+export type CreateAdoptionDto = {
+  AdoptedAnimals: number[];
+  CandidateId: number;
 };

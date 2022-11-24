@@ -1,6 +1,7 @@
 ﻿using AnimalShelter.Entities;
 using AnimalShelter.Models;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace AnimalShelter.Services
 {
@@ -9,10 +10,10 @@ namespace AnimalShelter.Services
         {
 
             public AddAdoptionFormOptionsListDto GetOptionsList();
-            //public int CreateCandidate(CreateCandidateDto dto);
-            //public void CreateAnimalCandidateRequirements(List<int> characteristics, int Id);
+        public bool CreateAdoption(CreateAdoptionDto dto);
+            
 
-        }
+    }
         public class AdoptionsService : IAdoptionsService
         {
             private readonly AnimalShelterDbContext _dbContext;
@@ -37,36 +38,55 @@ namespace AnimalShelter.Services
                     {
                         GenderId = c.CandidateRequirement.GenderId,
                         SpeciesId = c.CandidateRequirement.SpeciesId,
-                        CharacterisicsIds = c.CandidateRequirement.AnimalCandidateRequirements.Select(r => r.CharacteristicId).ToList(),
+                        CharacteristicsIds = c.CandidateRequirement.AnimalCandidateRequirements.Select(r => r.CharacteristicId).ToList(),
                     },
 
 
-                }).ToList()
+                }).ToList(),
+                Animals = _dbContext.Animals
+                .Include(i => i.Gender)
+                .Include(i => i.Species)
+                .Include(i => i.Den)
+                .Select(a => new LightAnimalDto()
+                {
+                    Id=a.Id,
+                    Description = $"{a.Name} {a.Race.Value} Wiek: {a.Age} {a.Gender.Value} Box: {a.Den.Box_Id} Legowisko: {a.Den_Id}",
+                    GenderId = a.Gender_id,
+                    SpeciesId = a.Species_Id,
+                    CharacteristicsIds = a.AnimalFutures.Select(af => af.Characeristic_Id).ToList(),
+                }).ToList(),
 
             };
-            /*public int CreateCandidate(CreateCandidateDto dto)
+           
+          
+        }
+        public bool CreateAdoption(CreateAdoptionDto dto)
+        {
+            
+            var adoptions = dto.AdoptedAnimals.Select(aa => new Adoption()
             {
-                var newCandidate = _mapper.Map<Candidate>(dto);
-                _dbContext.Candidates.Add(newCandidate);
-                _dbContext.SaveChanges();
+                Candidate_Id = dto.CandidateId,
+                Animal_Id = aa,
+                Date = DateTime.Now,
+            }).ToList();
 
-                return newCandidate.CandidateRequirement.Id;
-
-            }
-            */
-            /*public void CreateAnimalCandidateRequirements(List<int> characteristics, int Id)
+            _dbContext.Adoptions.AddRange(adoptions);
+            adoptions.ForEach(a =>
             {
-                characteristics.ForEach(characteristic =>
+                var animal = _dbContext.Animals.FirstOrDefault(an => an.Id == a.Id);
+
+            if (animal != null)
                 {
-                    _dbContext.AnimalCandidateRequirements.Add(new AnimalCandidateRequirements()
-                    {
-                        CandidateRequirementId = Id,
-                        CharacteristicId = characteristic
-                    });
-                });
+                    animal.Den_Id = null;
+                    
+                }
+               
+            });
 
-                _dbContext.SaveChanges();
-            }*/
+            _dbContext.SaveChanges();
+            return adoptions.Count == dto.AdoptedAnimals.Count;
+           
+
         }
 
     }

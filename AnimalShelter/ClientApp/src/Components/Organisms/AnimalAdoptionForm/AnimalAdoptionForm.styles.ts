@@ -9,7 +9,7 @@ export const AnimalAdoptionFormWrapper = styled(Form)`
     ${(props: StyledTheme) => props.theme.gradients.mainPinkGRadient}
   );
   border-radius: 10px;
-  padding: 40px 40px;
+  padding: 50px 50px;
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-rows: auto;
@@ -32,53 +32,14 @@ export const LeftPositionInputWrapper = styled.div`
   justify-items: flex-start;
 `;
 
-/*export const LabelChooseCandidate = styled.label`
-  font-family: ${(props: StyledTheme) => props.theme.fontFamily.inter};
-  display: flex;
-`;
-
-export const SelectCandidateForAdoption = styled.div`
-  width: 300px;
-  height: 50px;
-  background-color: ${(props: StyledTheme) =>
-    props.theme.colors.backgroundLightGray};
-  display: flex;
-  justify-self: center;
-  border-radius: 10px;
-`;
-
-export const SelectAndLabelWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-items: center;
-`;
-
-export const LabelAndCheckboxAnimalAdoptionWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const LabelAnimalAdoption = styled.label`
-  font-family: ${(props: StyledTheme) => props.theme.fontFamily.inter};
-`;
-
-export const CheckboxAnimalAdoption = styled.input`
-  width: 20px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  margin: 0 20px;
-  border-radius: 5px;
-`;*/
-
 export const MediumButtonWrapper = styled.div`
-  display: flex;
+  display: grid;
+  width: 50%;
+  grid-template-columns: 1fr 1fr;
   justify-content: center;
   align-items: center;
-  margin-top: 40px;
+  justify-self: center;
+  margin-top: 20px;
 `;
 
 export const AnimalAdoptionImg = styled.img`

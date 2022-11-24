@@ -20,7 +20,7 @@
         public Race Race { get; set; }
         public int Gender_id { get; set; }
         public Gender Gender { get; set; }
-        public int Den_Id { get; set; }
+        public int? Den_Id { get; set; }
         public Den Den { get; set; }
 
         public List<AnimalFuture> AnimalFutures { get; set; } = new List<AnimalFuture>();

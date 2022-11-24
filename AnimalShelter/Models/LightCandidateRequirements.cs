@@ -5,6 +5,6 @@
         public int GenderId { get; set; }
         public int SpeciesId { get; set; }
 
-        public List<int> CharacterisicsIds { get; set; }
+        public List<int> CharacteristicsIds { get; set; }
     }
 }
