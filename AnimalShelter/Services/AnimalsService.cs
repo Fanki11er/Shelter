@@ -44,6 +44,7 @@ namespace AnimalShelter.Services
                 .Include(r => r.Race)
                 .Include(s => s.Species)
                 .Include(g => g.Gender)
+                .Include(ad => ad.Adoption)
                 .Where(a => a.Species.Value == species && a.Adoption == null);
            
             return _mapper.Map<List<FullAnimalInfoDto>>(animalsList);

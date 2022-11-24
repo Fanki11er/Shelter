@@ -5,12 +5,6 @@ import {
   AnimalAdoptionImg,
   LeftPositionInputWrapper,
   MediumButtonWrapper,
-  /*CheckboxAnimalAdoption,
-  LabelAndCheckboxAnimalAdoptionWrapper,
-  LabelAnimalAdoption,
-  LabelChooseCandidate,
-  SelectAndLabelWrapper,
-  SelectCandidateForAdoption,*/
 } from "./AnimalAdoptionForm.styles";
 import ImgAnimalAdoption from "../../../Assets/Images/AnimalAdoption.svg";
 import { Formik } from "formik";

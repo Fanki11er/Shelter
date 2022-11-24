@@ -40,7 +40,7 @@ const AnimalsListWithFilter = (props: Props) => {
       }
     }
     /* eslint-disable */
-  }, [values]);
+  }, [values, animalsList]);
 
   const filterAnimals = (
     filter: number,

@@ -97,7 +97,7 @@ namespace AnimalShelter.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<int>("Den_Id")
+                    b.Property<int?>("Den_Id")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -123,7 +123,8 @@ namespace AnimalShelter.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Den_Id")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[Den_Id] IS NOT NULL");
 
                     b.HasIndex("Gender_id");
 
@@ -397,9 +398,7 @@ namespace AnimalShelter.Migrations
                 {
                     b.HasOne("AnimalShelter.Entities.Den", "Den")
                         .WithOne("Animal")
-                        .HasForeignKey("AnimalShelter.Entities.Animal", "Den_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AnimalShelter.Entities.Animal", "Den_Id");
 
                     b.HasOne("AnimalShelter.Entities.Gender", "Gender")
                         .WithMany("Animals")

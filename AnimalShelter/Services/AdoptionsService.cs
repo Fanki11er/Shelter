@@ -47,6 +47,8 @@ namespace AnimalShelter.Services
                 .Include(i => i.Gender)
                 .Include(i => i.Species)
                 .Include(i => i.Den)
+                .Include(i => i.Adoption)
+                .Where(a => a.Adoption == null)
                 .Select(a => new LightAnimalDto()
                 {
                     Id=a.Id,
@@ -71,9 +73,9 @@ namespace AnimalShelter.Services
             }).ToList();
 
             _dbContext.Adoptions.AddRange(adoptions);
-            adoptions.ForEach(a =>
+            adoptions.ForEach(ad =>
             {
-                var animal = _dbContext.Animals.FirstOrDefault(an => an.Id == a.Id);
+                var animal = _dbContext.Animals.FirstOrDefault(an => an.Id == ad.Animal_Id);
 
             if (animal != null)
                 {
