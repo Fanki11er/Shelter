@@ -357,7 +357,7 @@ namespace AnimalShelter.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(12)");
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 

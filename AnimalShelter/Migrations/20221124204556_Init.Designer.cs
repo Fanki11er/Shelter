@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AnimalShelter.Migrations
 {
     [DbContext(typeof(AnimalShelterDbContext))]
-    [Migration("20221124165715_Init")]
+    [Migration("20221124204556_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -360,7 +360,7 @@ namespace AnimalShelter.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(12)");
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 

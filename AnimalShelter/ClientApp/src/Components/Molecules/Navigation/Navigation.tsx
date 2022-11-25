@@ -46,15 +46,3 @@ const Navigation = () => {
 };
 
 export default Navigation;
-/*{!auth ? (
-          <>
-            <MediumButton as={Link} to={login}>
-              Zaloguj
-            </MediumButton>
-            <MediumButton as={Link} to={registration}>
-              Zarejestruj
-            </MediumButton>
-          </>
-        ) : (
-          <MediumButton onClick={() => setAuth(null)}>Wyloguj</MediumButton>
-        )} */

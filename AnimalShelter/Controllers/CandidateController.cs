@@ -1,10 +1,12 @@
 ﻿using AnimalShelter.Models;
 using AnimalShelter.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AnimalShelter.Controllers
 {
     [Route("Candidate")]
+    [Authorize]
     public class CandidateController : ControllerBase
     {
         private readonly ICandidatesService _candidatesService;

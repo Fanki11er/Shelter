@@ -1,10 +1,12 @@
 ﻿using AnimalShelter.Models;
 using AnimalShelter.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AnimalShelter.Controllers
 {
     [Route("Adoption")]
+    [Authorize]
     public class AdoptionsController : ControllerBase
     {
         private readonly IAdoptionsService _adoptionsService;

@@ -131,7 +131,7 @@ namespace AnimalShelter.Entities
             {
                 eb.Property(p => p.Name).HasColumnType("nvarchar(50)").IsRequired();
                 eb.Property(p => p.Email).HasColumnType("nvarchar(50)").IsRequired();
-                eb.Property(p => p.Password).HasColumnType("nvarchar(12)").IsRequired();
+                eb.Property(p => p.Password).HasColumnType("nvarchar(200)").IsRequired();
 
             });
 
