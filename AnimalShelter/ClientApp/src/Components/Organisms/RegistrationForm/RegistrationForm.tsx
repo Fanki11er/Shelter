@@ -1,10 +1,11 @@
 import InputField from "../../Molecules/InputField/InputField";
 import {
+  ButtonsWrapper,
   RegistrationFormWrapper,
   RegistrationHeader,
 } from "./RegistrationForm.styles";
 import { Formik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { routes } from "../../../Routes/Routes";
 import { FormError } from "../../Atoms/FormError/FormError";
@@ -116,7 +117,12 @@ const RegistrationForm = () => {
           label="Powtórz hasło"
           type="password"
         />
-        <LongButton type={"submit"}>Zarejestruj</LongButton>
+        <ButtonsWrapper>
+          <LongButton type={"submit"}>Zarejestruj</LongButton>
+          <LongButton as={Link} to={options}>
+            Powrót
+          </LongButton>
+        </ButtonsWrapper>
       </RegistrationFormWrapper>
     </Formik>
   );
