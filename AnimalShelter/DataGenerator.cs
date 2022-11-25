@@ -305,7 +305,99 @@ namespace AnimalShelter
                     }
 
 
+                },
+
+                 new Animal()
+                {
+                    Name = "Siemka",
+                    Age = 1,
+                    Weight = 8,
+                    Race_id = 3,
+                    Gender_id = 1,
+                    Species_Id = 2,
+                    Description = "Siemka to średniej wielkości suczka bardzo potrzebująca kontaktu z człowiekiem. Niezwykle spontanicznie okazuje radość skacząc opiekunowi niemal na głowę (opanowanie tego może wymagać trochę pracy).Kiedy jednak już uspokoi pierwszy entuzjazm, to idzie grzecznie na smyczy. Bardzo lubi spacery. Do psów jest wybiórcza, trzeba trochę uważać na kontakty.",
+                    Den_Id =  dbContext.Dens.FirstOrDefault(d => d.Box.Species_id == 2 && d.Animal == null).Id,
+                    AnimalFutures = new List<AnimalFuture>()
+                    {
+                        new AnimalFuture()
+                        {
+                            Characeristic_Id = 1,
+                        },
+                        new AnimalFuture()
+                        {
+                            Characeristic_Id = 4,
+                        },
+                         new AnimalFuture()
+                        {
+                            Characeristic_Id = 2,
+                        }
+                    }
+
+
+                },
+
+                 new Animal()
+                {
+                    Name = "Natka",
+                    Age = 4,
+                    Weight = 5,
+                    Race_id = 4,
+                    Gender_id = 1,
+                    Species_Id = 2,
+                    Description = "To czarny wulkan energii! Żywioł. Wypuszczona na wybieg nie zatrzyma się nawet na chwilę. Cały czas w ruchu. Przy tym sympatyczna, radosna. Mała, ale czasem trudna do opanowania.",
+                    Den_Id =  dbContext.Dens.FirstOrDefault(d => d.Box.Species_id == 2 && d.Animal == null).Id,
+                    AnimalFutures = new List<AnimalFuture>()
+                    {
+                        new AnimalFuture()
+                        {
+                            Characeristic_Id = 1,
+                        },
+                        new AnimalFuture()
+                        {
+                            Characeristic_Id = 5,
+                        },
+                         new AnimalFuture()
+                        {
+                            Characeristic_Id = 2,
+                        }
+                    }
+
+
+                },
+
+                  new Animal()
+                {
+                    Name = "Tori",
+                    Age = 2,
+                    Weight = 2,
+                    Race_id = 11,
+                    Gender_id = 1,
+                    Species_Id = 1,
+                    Description = "To piękna kotka o wyjątkowych, bursztynowych oczach!  W schronisku mieszka od września 2022 roku i mamy nadzieję, że nie zagości za długo. Tori jest bardzo wrażliwa, szczególnie potrzebuje kontaktu z człowiekiem, głasków i przytulania",
+                    Den_Id =  dbContext.Dens.FirstOrDefault(d => d.Box.Species_id == 2 && d.Animal == null).Id,
+                    AnimalFutures = new List<AnimalFuture>()
+                    {
+                        new AnimalFuture()
+                        {
+                            Characeristic_Id = 3,
+                        },
+                        new AnimalFuture()
+                        {
+                            Characeristic_Id = 5,
+                        },
+                         new AnimalFuture()
+                        {
+                            Characeristic_Id = 6,
+                        }
+                    }
+
+
                 }
+
+
+
+
+
             };
             return animals;
         }

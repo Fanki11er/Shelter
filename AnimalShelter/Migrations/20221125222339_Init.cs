@@ -228,7 +228,7 @@ namespace AnimalShelter.Migrations
                     Name = table.Column<string>(type: "nvarchar(30)", nullable: false),
                     Weight = table.Column<int>(type: "int", nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(200)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(600)", nullable: false),
                     SpeciesId = table.Column<int>(name: "Species_Id", type: "int", nullable: false),
                     Raceid = table.Column<int>(name: "Race_id", type: "int", nullable: false),
                     Genderid = table.Column<int>(name: "Gender_id", type: "int", nullable: false),

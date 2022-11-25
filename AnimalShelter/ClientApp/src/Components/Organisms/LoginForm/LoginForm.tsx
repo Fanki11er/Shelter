@@ -1,7 +1,11 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { routes } from "../../../Routes/Routes";
-import { LoginFormWrapper, LoginHeader } from "./LoginForm.styles";
+import {
+  ButtonsWrapper,
+  LoginFormWrapper,
+  LoginHeader,
+} from "./LoginForm.styles";
 import { Formik } from "formik";
 import { FormError } from "../../Atoms/FormError/FormError";
 import InputField from "../../Molecules/InputField/InputField";
@@ -44,27 +48,6 @@ const LoginForm = () => {
       .catch((e: any) => {
         console.log(e);
       });
-
-    /*try {
-      const { email, password } = values;
-      const response = await axios.post(
-        loginEndpoint,
-        JSON.stringify({
-          Email: email,
-          Password: password,
-        }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
-      response && handleSetAuth(response.data as AuthUser);
-      console.log(response.data, "Response");
-      navigate(options, { replace: true });
-    } catch (error: any) {
-      setError("Login error");
-      console.log(error);
-    }*/
   };
 
   return (
@@ -97,7 +80,12 @@ const LoginForm = () => {
           label="Hasło"
           type="password"
         />
-        <LongButton type={"submit"}>Zaloguj</LongButton>
+        <ButtonsWrapper>
+          <LongButton type={"submit"}>Zaloguj</LongButton>
+          <LongButton as={Link} to={options}>
+            Powrót
+          </LongButton>
+        </ButtonsWrapper>
       </LoginFormWrapper>
     </Formik>
   );

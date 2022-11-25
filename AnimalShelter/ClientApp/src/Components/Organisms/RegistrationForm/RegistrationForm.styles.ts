@@ -11,6 +11,7 @@ export const RegistrationFormWrapper = styled(Form)`
   border-radius: 10px;
   padding: 50px 40px;
   display: grid;
+  grid-template-columns: 1fr;
   grid-auto-rows: 70px;
   grid-row-gap: 15px;
   align-self: center;
@@ -24,4 +25,11 @@ export const RegistrationHeader = styled.h2`
   justify-content: center;
   font-family: ${(props: StyledTheme) => props.theme.fontFamily.inter};
   font-weight: normal;
+`;
+
+export const ButtonsWrapper = styled.div`
+  width: 400px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 `;

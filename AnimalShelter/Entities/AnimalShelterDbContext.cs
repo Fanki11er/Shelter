@@ -52,7 +52,7 @@ namespace AnimalShelter.Entities
                 eb.HasOne(a => a.Gender).WithMany(ge => ge.Animals).HasForeignKey(k => k.Gender_id);
                 eb.HasOne(a => a.Den).WithOne(de =>de.Animal).HasForeignKey<Animal>(k => k.Den_Id);
                 eb.Property(p => p.Name).HasColumnType("nvarchar(30)");
-                eb.Property(p => p.Description).HasColumnType("nvarchar(200)");
+                eb.Property(p => p.Description).HasColumnType("nvarchar(600)");
                 eb.Property(p => p.Gender_id).IsRequired();
                 eb.Property(p => p.Race_id).IsRequired();
                 eb.Property(p => p.Species_Id).IsRequired();

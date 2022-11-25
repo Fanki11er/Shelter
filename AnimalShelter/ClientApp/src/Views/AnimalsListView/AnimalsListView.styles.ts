@@ -8,6 +8,7 @@ export const AnimalsListViewWrapper = styled.div`
   grid-auto-rows: auto;
   grid-row-gap: 20px;
   justify-items: center;
+  justify-content: center;
 `;
 
 export const AnimalsListViewHeader = styled.h2`

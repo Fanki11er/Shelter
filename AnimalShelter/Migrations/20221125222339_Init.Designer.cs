@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AnimalShelter.Migrations
 {
     [DbContext(typeof(AnimalShelterDbContext))]
-    [Migration("20221124204556_Init")]
+    [Migration("20221125222339_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -105,7 +105,7 @@ namespace AnimalShelter.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(600)");
 
                     b.Property<int>("Gender_id")
                         .HasColumnType("int");

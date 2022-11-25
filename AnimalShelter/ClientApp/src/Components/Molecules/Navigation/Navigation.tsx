@@ -16,16 +16,18 @@ const Navigation = () => {
     <NavigationWrapper>
       <NavigationLogo to={index} />
       <NavigationButtonsWrapper>
-        {location.pathname === index && !auth && (
-          <>
-            <MediumButton as={Link} to={login}>
-              Zaloguj
-            </MediumButton>
-            <MediumButton as={Link} to={registration}>
-              Zarejestruj
-            </MediumButton>
-          </>
-        )}
+        {location.pathname !== login &&
+          location.pathname !== registration &&
+          !auth && (
+            <>
+              <MediumButton as={Link} to={login}>
+                Zaloguj
+              </MediumButton>
+              <MediumButton as={Link} to={registration}>
+                Zarejestruj
+              </MediumButton>
+            </>
+          )}
 
         {auth && (
           <MediumButton onClick={() => setAuth(null)}>Wyloguj</MediumButton>

@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { LongButton } from "../../Components/Atoms/Buttons/Buttons";
 import AnimalsList from "../../Components/Organisms/AnimalsList/AnimalsList";
+import { routes } from "../../Routes/Routes";
 import { AnimalForAdoption, Species } from "../../Types/types";
 import {
   AnimalsListViewHeader,
@@ -14,7 +16,7 @@ const AnimalsListView = () => {
   const [animalsList, setAnimalsList] = useState<AnimalForAdoption[] | null>(
     null
   );
-
+  const { options } = routes;
   const species = location.state && (location.state.species as Species | null);
 
   useEffect(() => {
@@ -43,6 +45,9 @@ const AnimalsListView = () => {
           Obecnie nie ma zwierzaków do wyświetlenia
         </NoAnimalsInformation>
       )}
+      <LongButton as={Link} to={options}>
+        Powrót
+      </LongButton>
     </AnimalsListViewWrapper>
   );
 };

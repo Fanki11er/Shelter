@@ -53,6 +53,10 @@ var app = builder.Build();
 
 using var scope = app.Services.CreateScope();
 var dbcontext = scope.ServiceProvider.GetService<AnimalShelterDbContext>();
+if (!dbcontext.Database.CanConnect())
+{
+    dbcontext.Database.Migrate();
+}
 
 DataGenerator.Seed(dbcontext);
 
