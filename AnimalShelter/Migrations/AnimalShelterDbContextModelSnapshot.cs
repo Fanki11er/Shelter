@@ -102,7 +102,7 @@ namespace AnimalShelter.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(600)");
 
                     b.Property<int>("Gender_id")
                         .HasColumnType("int");
