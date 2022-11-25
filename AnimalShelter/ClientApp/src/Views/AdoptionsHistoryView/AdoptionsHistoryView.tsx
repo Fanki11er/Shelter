@@ -1,6 +1,7 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import endpoints from "../../Api/endpoints";
 import AdoptionsHistoryList from "../../Components/Organisms/AdoptionsHistoryList/AdoptionsHistoryList";
+import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 import { AdoptionsHistoryDto } from "../../Types/types";
 import { AdoptionsHistoryViewWrapper } from "./AdoptionsHistoryView.styles";
 
@@ -8,10 +9,12 @@ const AdoptionsHistoryViewW = () => {
   const [adoptionsHistory, setAdoptionsHistory] = useState<
     AdoptionsHistoryDto[] | null
   >(null);
+  const { adoptionsHistoryEndpoint } = endpoints;
+  const axiosPrivate = useAxiosPrivate();
 
   useEffect(() => {
-    axios
-      .get(`https://localhost:7121/Adoption/History`)
+    axiosPrivate
+      .get(adoptionsHistoryEndpoint)
       .then((response) => {
         const data = response.data as AdoptionsHistoryDto[];
         setAdoptionsHistory(data);
@@ -19,7 +22,7 @@ const AdoptionsHistoryViewW = () => {
       .catch((e) => {
         console.log(e);
       });
-  }, []);
+  }, [axiosPrivate, adoptionsHistoryEndpoint]);
   return (
     <AdoptionsHistoryViewWrapper>
       {adoptionsHistory ? (

@@ -7,7 +7,6 @@ type InputProps = {
   label: string;
   placeholder?: string;
   type?: string;
-  inputRef?: React.RefObject<HTMLInputElement>;
   width?: string;
 };
 

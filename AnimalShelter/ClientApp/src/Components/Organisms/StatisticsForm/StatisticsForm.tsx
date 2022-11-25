@@ -22,7 +22,6 @@ const StatisticsForm = (props: Props) => {
   const renderElements = (statistics: BoxesStatisticsDto[]) => {
     return statistics.map((statistic, index) => {
       const { information, allDens, usedDens } = statistic;
-      console.log(usedDens, allDens);
       return (
         <TextStatisticsElement key={index}>
           <StatisticInfo>{information}</StatisticInfo>

@@ -8,7 +8,6 @@ import {
 } from "./AnimalAdoptionForm.styles";
 import ImgAnimalAdoption from "../../../Assets/Images/AnimalAdoption.svg";
 import { Formik } from "formik";
-import axios from "axios";
 import SelectInputField from "../../Molecules/SelectInputField/SelectInputField";
 import CheckboxField from "../../Molecules/CheckboxField/CheckboxField";
 import {
@@ -18,8 +17,10 @@ import {
   SelectOption,
 } from "../../../Types/types";
 import AnimalsListWithFilter from "../../Molecules/AnimalsListWithFilter/AnimalsListWithFilter";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { routes } from "../../../Routes/Routes";
+import endpoints from "../../../Api/endpoints";
+import useAxiosPrivate from "../../../Hooks/useAxiosPrivate";
 
 export interface MyFormValues {
   candidateId: number;
@@ -39,6 +40,10 @@ const AnimalAdoptionForm = (props: Props) => {
     adoptedAnimals: [],
     filter: "",
   };
+
+  const { adopt } = endpoints;
+  const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
 
   const convertToOptions = (candidates: LightCandidateDto[]) => {
     const optionsList = candidates.map((candidate) => {
@@ -77,10 +82,10 @@ const AnimalAdoptionForm = (props: Props) => {
         CandidateId: Number(candidateId),
       };
 
-      axios
-        .post(`https://localhost:7121/Adoption/Adopt`, createAdoptionDto)
+      axiosPrivate
+        .post(adopt, createAdoptionDto)
         .then((response) => {
-          console.log(response);
+          navigate(options, { replace: true });
         })
         .catch((e) => {
           console.log(e);

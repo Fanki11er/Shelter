@@ -1,6 +1,7 @@
-import axios from "axios";
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
+import endpoints from "../../../Api/endpoints";
+import useAxiosPrivate from "../../../Hooks/useAxiosPrivate";
 import { routes } from "../../../Routes/Routes";
 import {
   AddCandidateFormOptionsList,
@@ -49,6 +50,9 @@ const AddCandidateForm = (props: Props) => {
     gender: 0,
     characteristics: [],
   };
+
+  const { addCandidate } = endpoints;
+  const axiosPrivate = useAxiosPrivate();
 
   const renderCheckboxes = (characteristicsList: SelectOption[]) => {
     return characteristicsList.map((characteristic) => {
@@ -107,15 +111,10 @@ const AddCandidateForm = (props: Props) => {
         GenderId: Number(gender),
         SpeciesId: Number(species),
       } as CreateCandidateDto;
-      console.log(createCandidateDto);
-      axios
-        .post(
-          `https://localhost:7121/Candidate/AddCandidate`,
-          createCandidateDto
-        )
-        .then((response) => {
-          console.log(response);
-        })
+
+      axiosPrivate
+        .post(addCandidate, createCandidateDto)
+        .then((response) => {})
         .catch((e) => {
           console.log(e);
         });

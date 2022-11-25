@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../../Routes/Routes";
 import { LoginFormWrapper, LoginHeader } from "./LoginForm.styles";
 import { Formik } from "formik";
 import { FormError } from "../../Atoms/FormError/FormError";
 import InputField from "../../Molecules/InputField/InputField";
-import { MediumButton } from "../../Atoms/Buttons/Buttons";
+import { LongButton } from "../../Atoms/Buttons/Buttons";
+import { AuthContext } from "../../../Providers/AuthProvider";
+import axios from "../../../Api/axios";
+import endpoints from "../../../Api/endpoints";
+import { AuthUser } from "../../../Types/types";
 
 interface MyFormValues {
   email: string;
@@ -18,15 +22,49 @@ const LoginForm = () => {
     password: "",
   };
 
-  const { login } = routes;
+  const { options } = routes;
+  const { loginEndpoint } = endpoints;
 
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const { setAuth } = useContext(AuthContext);
 
-  const handleSubmit = async (value: MyFormValues) => {
-    console.log("test");
+  const handleSubmit = async (values: MyFormValues) => {
     setError("");
-    navigate(login, { replace: true });
+
+    axios
+      .post(loginEndpoint, { email: values.email, password: values.password })
+      .then((response) => {
+        const user = response.data as AuthUser | null;
+        if (user) {
+          setAuth(user);
+          navigate(options, { replace: true });
+        }
+      })
+      .catch((e: any) => {
+        console.log(e);
+      });
+
+    /*try {
+      const { email, password } = values;
+      const response = await axios.post(
+        loginEndpoint,
+        JSON.stringify({
+          Email: email,
+          Password: password,
+        }),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+      response && handleSetAuth(response.data as AuthUser);
+      console.log(response.data, "Response");
+      navigate(options, { replace: true });
+    } catch (error: any) {
+      setError("Login error");
+      console.log(error);
+    }*/
   };
 
   return (
@@ -34,7 +72,6 @@ const LoginForm = () => {
       initialValues={initialValues}
       onSubmit={(values, action) => {
         handleSubmit(values);
-        console.log("Submit");
 
         action.setSubmitting(false);
       }}
@@ -60,7 +97,7 @@ const LoginForm = () => {
           label="Hasło"
           type="password"
         />
-        <MediumButton type={"submit"}>Zaloguj</MediumButton>
+        <LongButton type={"submit"}>Zaloguj</LongButton>
       </LoginFormWrapper>
     </Formik>
   );

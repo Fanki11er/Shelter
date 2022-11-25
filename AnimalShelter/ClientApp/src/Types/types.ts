@@ -100,3 +100,15 @@ export type BoxesStatisticsDto = {
 export type AdoptionsHistoryDto = {
   information: string;
 };
+
+export type RegisterWorkerDto = {
+  Email: string;
+  Name: string;
+  UserPassword: string;
+};
+
+export type AuthUser = {
+  id: number;
+  name: string;
+  accessToken?: string;
+};
