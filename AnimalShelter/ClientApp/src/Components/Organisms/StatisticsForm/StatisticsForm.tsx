@@ -1,22 +1,47 @@
-import { MediumButton } from "../../Atoms/Buttons/Buttons";
+import { Link } from "react-router-dom";
+import { routes } from "../../../Routes/Routes";
+import { BoxesStatisticsDto } from "../../../Types/types";
+import { LongButton } from "../../Atoms/Buttons/Buttons";
 import {
+  ColoredSpan,
+  StatisticInfo,
   StatisticsFormWrapper,
   StatisticsHeader,
-  TextStatistics,
+  StatisticsList,
+  TextStatisticsElement,
 } from "./StatisticsForm.styles";
 
-const StatisticsForm = () => {
+type Props = {
+  statistics: BoxesStatisticsDto[];
+};
+
+const StatisticsForm = (props: Props) => {
+  const { statistics } = props;
+  const { options } = routes;
+
+  const renderElements = (statistics: BoxesStatisticsDto[]) => {
+    return statistics.map((statistic, index) => {
+      const { information, allDens, usedDens } = statistic;
+      return (
+        <TextStatisticsElement key={index}>
+          <StatisticInfo>{information}</StatisticInfo>
+          <ColoredSpan
+            amount={allDens / usedDens}
+          >{`${usedDens} / ${allDens}`}</ColoredSpan>
+        </TextStatisticsElement>
+      );
+    });
+  };
   return (
     <StatisticsFormWrapper>
       <StatisticsHeader>Statystyki</StatisticsHeader>
-      <TextStatistics>Boks: 1 Gatunek: Psy Zajęte miejsca: 0 6</TextStatistics>
-      <TextStatistics>Boks: 2 Gatunek: Koty Zajęte miejsca: 6 6</TextStatistics>
-      <TextStatistics>Boks: 3 Gatunek: Psy Zajęte miejsca: 5 6</TextStatistics>
-      <TextStatistics>Boks: 4 Gatunek: Psy Zajęte miejsca: 4 6</TextStatistics>
-      <TextStatistics>Boks: 5 Gatunek: Koty Zajęte miejsca: 2 6</TextStatistics>
-      <TextStatistics>Boks: 6 Gatunek: Psy Zajęte miejsca: 4 5</TextStatistics>
 
-      <MediumButton>Cofnij</MediumButton>
+      <StatisticsList>
+        {statistics.length ? renderElements(statistics) : null}
+      </StatisticsList>
+      <LongButton as={Link} to={options}>
+        Powrót
+      </LongButton>
     </StatisticsFormWrapper>
   );
 };

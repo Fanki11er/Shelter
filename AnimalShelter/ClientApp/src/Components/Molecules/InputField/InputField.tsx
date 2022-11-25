@@ -5,19 +5,19 @@ import { InputFieldWrapper } from "./InputField.styles";
 type InputProps = {
   name: string;
   label: string;
-  placeholder: string;
+  placeholder?: string;
   type?: string;
-  inputRef?: React.RefObject<HTMLInputElement>;
+  width?: string;
 };
 
 const InputField = (props: InputProps) => {
   const { name, label, placeholder, type } = props;
   return (
-    <InputFieldWrapper>
+    <InputFieldWrapper width={props.width}>
       <Label>{label}</Label>
       <Input
         name={name}
-        placeholder={placeholder}
+        placeholder={placeholder ? placeholder : ""}
         type={type ? type : "text"}
       />
     </InputFieldWrapper>

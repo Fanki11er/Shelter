@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AnimalShelter.Migrations
 {
     [DbContext(typeof(AnimalShelterDbContext))]
-    [Migration("20221118220159_Init")]
+    [Migration("20221124204556_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -100,7 +100,7 @@ namespace AnimalShelter.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<int>("Den_Id")
+                    b.Property<int?>("Den_Id")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -126,7 +126,8 @@ namespace AnimalShelter.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Den_Id")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[Den_Id] IS NOT NULL");
 
                     b.HasIndex("Gender_id");
 
@@ -359,7 +360,7 @@ namespace AnimalShelter.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(12)");
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
@@ -400,9 +401,7 @@ namespace AnimalShelter.Migrations
                 {
                     b.HasOne("AnimalShelter.Entities.Den", "Den")
                         .WithOne("Animal")
-                        .HasForeignKey("AnimalShelter.Entities.Animal", "Den_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AnimalShelter.Entities.Animal", "Den_Id");
 
                     b.HasOne("AnimalShelter.Entities.Gender", "Gender")
                         .WithMany("Animals")

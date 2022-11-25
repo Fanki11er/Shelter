@@ -23,10 +23,92 @@ export type AddAnimalFormOptionsList = {
   genders: SelectOption[];
   boxes: SelectOption[];
   dens: SelectOption[];
+  characteristics: SelectOption[];
 };
 
 export type SelectOption = {
   id: number;
   value: string;
   additionalValue: number;
+};
+
+export type CreateAnimalDto = {
+  Name: string;
+  Weight: number;
+  Age: number;
+  SpeciesId: number;
+  RaceId: number;
+  GenderId: number;
+  DenId: number;
+  Characteristics: number[];
+  Description: string;
+};
+
+export type CreateCandidateDto = {
+  Name: string;
+  City: string;
+  Street: string;
+  Phone: string;
+  PostalCode: string;
+  Characteristics: number[];
+  SpeciesId: number;
+  GenderId: number;
+};
+
+export type AddCandidateFormOptionsList = {
+  species: SelectOption[];
+  genders: SelectOption[];
+  characteristics: SelectOption[];
+};
+
+export type AdoptionOptionsList = {
+  candidates: LightCandidateDto[];
+  animals: LightAnimalDto[];
+};
+
+export type LightCandidateDto = {
+  id: number;
+  name: string;
+  candidateRequirements: LightCandidateRequirements;
+};
+
+export type LightAnimalDto = {
+  id: number;
+  description: string;
+  characteristicsIds: number[];
+  genderId: number;
+  speciesId: number;
+};
+
+export type LightCandidateRequirements = {
+  genderId: number;
+  speciesId: number;
+  characteristicsIds: number[];
+};
+
+export type CreateAdoptionDto = {
+  AdoptedAnimals: number[];
+  CandidateId: number;
+};
+
+export type BoxesStatisticsDto = {
+  information: string;
+  allDens: number;
+  usedDens: number;
+};
+
+export type AdoptionsHistoryDto = {
+  information: string;
+};
+
+export type RegisterWorkerDto = {
+  Email: string;
+  Name: string;
+  UserPassword: string;
+};
+
+export type AuthUser = {
+  id: number;
+  name: string;
+  accessToken?: string;
 };

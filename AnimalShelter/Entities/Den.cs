@@ -5,7 +5,7 @@
         public int Id { get; set; }
 
         //Relations
-        public Animal? Animal { get; set; }
+        public Animal? Animal { get; set; } 
 
         public int Box_Id { get; set; }
 

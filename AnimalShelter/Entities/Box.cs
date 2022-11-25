@@ -10,5 +10,6 @@
         public Species Species { get; set; }
 
         public List<Den> Dens { get; set; } = new List<Den>();
+   
     }
 }

@@ -7,4 +7,6 @@ export const routes = {
   options: "/Options",
   adoption: "/Adoption",
   addAnimalForm: "/AddAnimalForm",
+  addCandidateForm: "/AddCandidateForm",
+  adoptionsHistory: "/AdoptionsHistory",
 };

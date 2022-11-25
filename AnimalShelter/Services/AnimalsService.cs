@@ -11,6 +11,9 @@ namespace AnimalShelter.Services
         public AnimalsAmountDto GetAnimalsToAdoptionAmout();
         public IEnumerable<FullAnimalInfoDto> GetAnimalsList(string species);
         public AddAnimalFormOptionsListDto GetOptionsList();
+        public int CreateAnimal(CreateAnimalDto dto);
+        public void CreateAnimalFutures(List<int> characteristics, int Id);
+        public List<BoxesStatisticsDto> GetStatisticsList();
 
     }
 
@@ -42,6 +45,7 @@ namespace AnimalShelter.Services
                 .Include(r => r.Race)
                 .Include(s => s.Species)
                 .Include(g => g.Gender)
+                .Include(ad => ad.Adoption)
                 .Where(a => a.Species.Value == species && a.Adoption == null);
            
             return _mapper.Map<List<FullAnimalInfoDto>>(animalsList);
@@ -60,7 +64,41 @@ namespace AnimalShelter.Services
                 Genders = _mapper.Map<List<SelectOptionDto>>(_dbContext.Genders),
                 Boxes = _mapper.Map<List<SelectOptionDto>>(_dbContext.Boxes),
                 Dens = _mapper.Map<List<SelectOptionDto>>(freeDens),
+                Characteristics = _mapper.Map<List<SelectOptionDto>>(_dbContext.Characteristics)
             };
+        }
+
+        public int CreateAnimal(CreateAnimalDto dto)
+        {
+            var newAnimal = _mapper.Map<Animal>(dto);
+            _dbContext.Animals.Add(newAnimal);
+            _dbContext.SaveChanges();
+
+            return newAnimal.Id;
+           
+
+        }
+
+        public void CreateAnimalFutures(List<int> characteristics, int Id)
+        {
+           characteristics.ForEach(characteristic =>
+            {
+                _dbContext.AnimalFutures.Add(new AnimalFuture()
+                {
+                    Animal_Id = Id,
+                    Characeristic_Id = characteristic
+                });
+            });
+
+            _dbContext.SaveChanges();
+        }
+
+        public List<BoxesStatisticsDto> GetStatisticsList()
+        {
+            return _mapper.Map<List<BoxesStatisticsDto>>(_dbContext.Boxes
+                .Include(i => i.Dens)
+                .Include(i => i.Species));
+                
         }
     }
 }

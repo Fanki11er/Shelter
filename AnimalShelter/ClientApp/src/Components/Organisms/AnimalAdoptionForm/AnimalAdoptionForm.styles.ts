@@ -1,79 +1,45 @@
+import { Form } from "formik";
 import styled from "styled-components";
 import { StyledTheme } from "../../../GlobalStyles/theme";
 
-export const AnimalAdoptionFormWrapper = styled.div`
+export const AnimalAdoptionFormWrapper = styled(Form)`
   width: 1000px;
   height: auto;
   background-image: linear-gradient(
     ${(props: StyledTheme) => props.theme.gradients.mainPinkGRadient}
   );
   border-radius: 10px;
-  padding: 20px 40px;
+  padding: 50px 50px;
   display: grid;
-  grid-template-rows: 30px 200px 50px 50px 50px 50px 50px;
-  grid-row-gap: 15px;
-  align-self: center;
-  align-items: center;
-  justify-content: flex-start;
   grid-template-columns: 1fr;
+  grid-auto-rows: auto;
+  row-gap: 40px;
+  justify-content: center;
   position: relative;
+  font-family: ${(props: StyledTheme) => props.theme.fontFamily.inter};
 `;
 
 export const AnimalAdoptionHeader = styled.h2`
-  font-family: ${(props: StyledTheme) => props.theme.fontFamily.inter};
-  font-weight: normal;
   display: flex;
   justify-self: center;
   margin: 0 auto;
 `;
 
-export const LabelChooseCandidate = styled.label`
-  font-family: ${(props: StyledTheme) => props.theme.fontFamily.inter};
+export const LeftPositionInputWrapper = styled.div`
+  width: 100%;
+  height: fit-content;
   display: flex;
-`;
-
-export const SelectCandidateForAdoption = styled.div`
-  width: 300px;
-  height: 50px;
-  background-color: ${(props: StyledTheme) =>
-    props.theme.colors.backgroundLightGray};
-  display: flex;
-  justify-self: center;
-  border-radius: 10px;
-`;
-
-export const SelectAndLabelWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-items: center;
-`;
-
-export const LabelAndCheckboxAnimalAdoptionWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const LabelAnimalAdoption = styled.label`
-  font-family: ${(props: StyledTheme) => props.theme.fontFamily.inter};
-`;
-
-export const CheckboxAnimalAdoption = styled.input`
-  width: 20px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  margin: 0 20px;
-  border-radius: 5px;
+  justify-items: flex-start;
 `;
 
 export const MediumButtonWrapper = styled.div`
-  display: flex;
+  display: grid;
+  width: 50%;
+  grid-template-columns: 1fr 1fr;
   justify-content: center;
   align-items: center;
-  margin-top: 40px;
+  justify-self: center;
+  margin-top: 20px;
 `;
 
 export const AnimalAdoptionImg = styled.img`

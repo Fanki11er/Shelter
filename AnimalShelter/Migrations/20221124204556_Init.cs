@@ -72,7 +72,7 @@ namespace AnimalShelter.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(12)", nullable: false)
+                    Password = table.Column<string>(type: "nvarchar(200)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -232,7 +232,7 @@ namespace AnimalShelter.Migrations
                     SpeciesId = table.Column<int>(name: "Species_Id", type: "int", nullable: false),
                     Raceid = table.Column<int>(name: "Race_id", type: "int", nullable: false),
                     Genderid = table.Column<int>(name: "Gender_id", type: "int", nullable: false),
-                    DenId = table.Column<int>(name: "Den_Id", type: "int", nullable: false)
+                    DenId = table.Column<int>(name: "Den_Id", type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -241,8 +241,7 @@ namespace AnimalShelter.Migrations
                         name: "FK_Animals_Dens_Den_Id",
                         column: x => x.DenId,
                         principalTable: "Dens",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Animals_Genders_Gender_id",
                         column: x => x.Genderid,
@@ -355,7 +354,8 @@ namespace AnimalShelter.Migrations
                 name: "IX_Animals_Den_Id",
                 table: "Animals",
                 column: "Den_Id",
-                unique: true);
+                unique: true,
+                filter: "[Den_Id] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Animals_Gender_id",

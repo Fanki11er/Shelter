@@ -4,7 +4,7 @@ import { StyledTheme } from "../../../GlobalStyles/theme";
 const DefaultButton = styled.button`
   width: 85px;
   height: 35px;
-  border-radius: 5px;
+  border-radius: 10px;
   transition: all 0.5s;
   :hover {
     color: ${(props: StyledTheme) => props.theme.colors.orange};
